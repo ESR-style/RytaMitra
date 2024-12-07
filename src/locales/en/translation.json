@@ -185,5 +185,68 @@
   "common": {
     "cancel": "Cancel",
     "save": "Save"
+  },
+  "loans": {
+    "myLoans": "My Loans",
+    "bankOffers": "Bank Offers",
+    "fdRates": "Fixed Deposit Rates",
+    "riskAnalysis": "Risk Analysis",
+    "addNew": "Add New Loan",
+    "status": {
+      "active": "Active",
+      "closed": "Closed",
+      "defaulted": "Defaulted"
+    },
+    "analysis": {
+      "title": "Loan Risk Analysis",
+      "monthlyIncome": "Monthly Income",
+      "existingLoans": "Existing Loan EMIs",
+      "expenses": "Monthly Expenses",
+      "creditScore": "Credit Score",
+      "recommendation": "Recommendation",
+      "maximumEligible": "Maximum Eligible Amount",
+      "suggestedEMI": "Suggested EMI",
+      "repaymentPlan": "Repayment Plan",
+      "risk": {
+        "low": "Low Risk",
+        "medium": "Medium Risk",
+        "high": "High Risk"
+      }
+    },
+    "form": {
+      "bankName": "Bank Name",
+      "loanType": "Loan Type",
+      "amount": "Loan Amount",
+      "interestRate": "Interest Rate (%)",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "monthlyPayment": "Monthly Payment",
+      "remainingAmount": "Remaining Amount"
+    },
+    "guide": {
+      "howToRead": "How to Read Loan Details",
+      "interestExplanation": "Interest Rate Explanation",
+      "documents": "Required Documents",
+      "bestPractices": "Best Practices"
+    },
+    "filter": {
+      "all": "All Loans"
+    },
+    "risk": {
+      "low": "Low Risk",
+      "medium": "Medium Risk",
+      "high": "High Risk"
+    },
+    "language": {
+      "kannada": "Kannada",
+      "hindi": "Hindi",
+      "english": "English"
+    },
+    "tooltip": {
+      "interestRate": "Annual Interest Rate",
+      "monthlyPayment": "Monthly Payment",
+      "documents": "Required Documents",
+      "helpline": "Helpline Number"
+    }
   }
 }

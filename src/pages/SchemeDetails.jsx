@@ -104,6 +104,8 @@ const SchemeDetails = () => {
               onClick={() => {
                 if (id === 'ganga-kalyana') {
                   window.open('https://kmdc.karnataka.gov.in', '_blank');
+                } else if (id === 'pmfby') {
+                  window.open('https://pmfby.gov.in', '_blank');
                 }
                 // Add other scheme links as needed
               }}

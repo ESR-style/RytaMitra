@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Dialog, DialogTitle, DialogContent, DialogActions,
-  Button, Grid, TextField, FormControl, InputLabel, Select, MenuItem, Paper, Typography
+  Button, Grid, TextField, FormControl, InputLabel, Select, MenuItem, Paper, Typography, IconButton
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { bankLoanOffers } from '../../data/bankData';
@@ -49,11 +49,24 @@ const LoanForm = ({ open, onClose, onSubmit, formData, onChange }) => {
   }, [formData]);
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog 
+      open={open} 
+      onClose={onClose} 
+      maxWidth="sm" 
+      fullWidth
+      fullScreen={window.innerWidth < 600} // Make fullscreen on mobile
+    >
       <DialogTitle>
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🏦</span>
-          {t('loans.addNew')}
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🏦</span>
+            {t('loans.addNew')}
+          </div>
+          {window.innerWidth < 600 && (
+            <IconButton edge="end" onClick={onClose}>
+              <span>✕</span>
+            </IconButton>
+          )}
         </div>
       </DialogTitle>
       <form onSubmit={handleSubmit}>

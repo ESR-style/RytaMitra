@@ -109,62 +109,70 @@ const Loan = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-2 md:p-6 max-w-7xl mx-auto">
       {error && (
         <Alert severity="error" className="mb-4">
           {error}
         </Alert>
       )}
-      <Tabs value={activeTab} onChange={(e, newValue) => setActiveTab(newValue)}>
+      <Tabs 
+        value={activeTab} 
+        onChange={(e, newValue) => setActiveTab(newValue)}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
+      >
         <Tab label={t('loans.myLoans')} />
         <Tab label={t('loans.bankOffers')} />
         <Tab label={t('loans.fdRates')} />
         <Tab label={t('loans.riskAnalysis')} />
       </Tabs>
 
-      {activeTab === 0 && (
-        <div className="mt-6 space-y-4">
-          {isLoading ? (
-            <Typography>Loading...</Typography>
-          ) : (
-            <>
-              <LoanSummary loans={myLoans} />
-              <div className="flex justify-between items-center">
-                <Typography variant="h6">
-                  {t('loans.activeLoansList')} ({myLoans.length})
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  color="primary"
-                  startIcon={<span>➕</span>}
-                  onClick={() => setOpenLoanDialog(true)}
-                >
-                  {t('loans.addNew')}
-                </Button>
-              </div>
-              {myLoans.length > 0 ? (
-                <LoanList loans={myLoans} />
-              ) : (
-                <Typography className="text-center py-4">
-                  {t('loans.noLoansYet')}
-                </Typography>
-              )}
-            </>
-          )}
-        </div>
-      )}
+      <div className="mt-4 md:mt-6">
+        {activeTab === 0 && (
+          <div className="mt-6 space-y-4">
+            {isLoading ? (
+              <Typography>Loading...</Typography>
+            ) : (
+              <>
+                <LoanSummary loans={myLoans} />
+                <div className="flex justify-between items-center">
+                  <Typography variant="h6">
+                    {t('loans.activeLoansList')} ({myLoans.length})
+                  </Typography>
+                  <Button 
+                    variant="contained" 
+                    color="primary"
+                    startIcon={<span>➕</span>}
+                    onClick={() => setOpenLoanDialog(true)}
+                  >
+                    {t('loans.addNew')}
+                  </Button>
+                </div>
+                {myLoans.length > 0 ? (
+                  <LoanList loans={myLoans} />
+                ) : (
+                  <Typography className="text-center py-4">
+                    {t('loans.noLoansYet')}
+                  </Typography>
+                )}
+              </>
+            )}
+          </div>
+        )}
 
-      {activeTab === 1 && <BankOffersView />}
-      {activeTab === 2 && <FDRatesView />}
-      {activeTab === 3 && <RiskAnalysis />}
+        {activeTab === 1 && <BankOffersView />}
+        {activeTab === 2 && <FDRatesView />}
+        {activeTab === 3 && <RiskAnalysis />}
 
-      <LoanForm
-        open={openLoanDialog}
-        onClose={() => setOpenLoanDialog(false)}
-        onSubmit={handleAddLoan}
-        formData={newLoan}
-        onChange={setNewLoan}
-      />
+        <LoanForm
+          open={openLoanDialog}
+          onClose={() => setOpenLoanDialog(false)}
+          onSubmit={handleAddLoan}
+          formData={newLoan}
+          onChange={setNewLoan}
+        />
+      </div>
     </div>
   );
 };

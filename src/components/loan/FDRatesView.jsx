@@ -57,12 +57,14 @@ const FDRatesView = () => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Main Tabs */}
+    <div className="space-y-6 p-2 md:p-6">
+      {/* Main Tabs - Make them scrollable on mobile */}
       <Tabs 
         value={activeTab} 
         onChange={(e, v) => setActiveTab(v)}
-        variant="fullWidth"
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
         className="bg-white rounded-lg"
       >
         {fdHelpers.tabs[currentLanguage].map((tab, idx) => (
@@ -72,7 +74,7 @@ const FDRatesView = () => {
 
       {/* Popular Banks View */}
       {activeTab === 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {fdRates.map((bank, idx) => (
             <Paper key={idx} className="p-4 hover:shadow-lg transition-shadow">
               <div className="flex items-center gap-2 mb-4">
@@ -127,59 +129,61 @@ const FDRatesView = () => {
           </div>
 
           {/* Comparison Chart */}
-          <Paper className="p-4">
-            <ResponsiveContainer width="100%" height={400}>
-              <BarChart data={getComparisonData()}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="name" 
-                  angle={-45} 
-                  textAnchor="end" 
-                  height={100}
-                />
-                <YAxis 
-                  label={{ 
-                    value: t('loans.interest.rate'), 
-                    angle: -90, 
-                    position: 'insideLeft' 
-                  }} 
-                />
-                <Tooltip 
-                  content={({ payload, label }) => {
-                    if (payload && payload.length) {
-                      const data = payload[0].payload;
-                      return (
-                        <div className="bg-white p-3 rounded-lg shadow border">
-                          <p className="font-bold">{label}</p>
-                          <p className="text-green-600">
-                            {t('loans.interest.normal')}: {data[selectedDuration]}%
-                          </p>
-                          <p className="text-blue-600">
-                            {t('loans.interest.senior')}: {(data[selectedDuration] + data.senior_rate).toFixed(2)}%
-                          </p>
-                          <p className="text-gray-600 text-sm">
-                            {t('loans.deposit.minimum')}: ₹{data.min_deposit}
-                          </p>
-                        </div>
-                      );
-                    }
-                    return null;
-                  }}
-                />
-                <Bar 
-                  dataKey={selectedDuration}
-                  fill="#4F46E5"
-                  name={t('loans.interest.rate')}
-                >
-                  {getComparisonData().map((entry, index) => (
-                    <Cell 
-                      key={index}
-                      fill={entry.bank_type === "Public" ? "#4F46E5" : "#10B981"}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+          <Paper className="p-4 overflow-x-auto">
+            <div className="min-w-[600px]"> {/* Minimum width for scrolling */}
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={getComparisonData()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis 
+                    dataKey="name" 
+                    angle={-45} 
+                    textAnchor="end" 
+                    height={100}
+                  />
+                  <YAxis 
+                    label={{ 
+                      value: t('loans.interest.rate'), 
+                      angle: -90, 
+                      position: 'insideLeft' 
+                    }} 
+                  />
+                  <Tooltip 
+                    content={({ payload, label }) => {
+                      if (payload && payload.length) {
+                        const data = payload[0].payload;
+                        return (
+                          <div className="bg-white p-3 rounded-lg shadow border">
+                            <p className="font-bold">{label}</p>
+                            <p className="text-green-600">
+                              {t('loans.interest.normal')}: {data[selectedDuration]}%
+                            </p>
+                            <p className="text-blue-600">
+                              {t('loans.interest.senior')}: {(data[selectedDuration] + data.senior_rate).toFixed(2)}%
+                            </p>
+                            <p className="text-gray-600 text-sm">
+                              {t('loans.deposit.minimum')}: ₹{data.min_deposit}
+                            </p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Bar 
+                    dataKey={selectedDuration}
+                    fill="#4F46E5"
+                    name={t('loans.interest.rate')}
+                  >
+                    {getComparisonData().map((entry, index) => (
+                      <Cell 
+                        key={index}
+                        fill={entry.bank_type === "Public" ? "#4F46E5" : "#10B981"}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
 
             {/* Legend */}
             <div className="flex justify-center gap-4 mt-4">
@@ -210,96 +214,98 @@ const FDRatesView = () => {
 
       {/* Improved Calculator View */}
       {activeTab === 2 && (
-        <Paper className="p-6">
-          <Typography variant="h6" className="mb-4">
-            {t('loans.calculator.fdTitle')}
-          </Typography>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <TextField
-                label={t('loans.calculator.depositAmount')}
-                type="number"
-                value={calculatorValues.amount}
-                onChange={(e) => setCalculatorValues({
-                  ...calculatorValues,
-                  amount: Number(e.target.value)
-                })}
-                placeholder={t('loans.calculator.amountPlaceholder')}
-                InputProps={{
-                  startAdornment: <span className="text-gray-500">₹</span>
-                }}
-                fullWidth
-              />
-              
-              <TextField
-                label={t('loans.calculator.interestRate')}
-                type="number"
-                value={calculatorValues.interestRate}
-                onChange={(e) => setCalculatorValues({
-                  ...calculatorValues,
-                  interestRate: Number(e.target.value)
-                })}
-                placeholder={t('loans.calculator.ratePlaceholder')}
-                InputProps={{
-                  endAdornment: <span className="text-gray-500">%</span>
-                }}
-                fullWidth
-              />
-              
-              <TextField
-                label={t('loans.calculator.depositYears')}
-                type="number"
-                value={calculatorValues.years}
-                onChange={(e) => setCalculatorValues({
-                  ...calculatorValues,
-                  years: Number(e.target.value)
-                })}
-                placeholder={t('loans.calculator.yearsPlaceholder')}
-                fullWidth
-              />
-              
-              <Button 
-                variant="contained" 
-                color="primary"
-                onClick={calculateFDReturn}
-                fullWidth
-              >
-                {t('loans.calculator.calculate')}
-              </Button>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Paper className="p-4">
+            <Typography variant="h6" className="mb-4">
+              {t('loans.calculator.fdTitle')}
+            </Typography>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <TextField
+                  label={t('loans.calculator.depositAmount')}
+                  type="number"
+                  value={calculatorValues.amount}
+                  onChange={(e) => setCalculatorValues({
+                    ...calculatorValues,
+                    amount: Number(e.target.value)
+                  })}
+                  placeholder={t('loans.calculator.amountPlaceholder')}
+                  InputProps={{
+                    startAdornment: <span className="text-gray-500">₹</span>
+                  }}
+                  fullWidth
+                />
+                
+                <TextField
+                  label={t('loans.calculator.interestRate')}
+                  type="number"
+                  value={calculatorValues.interestRate}
+                  onChange={(e) => setCalculatorValues({
+                    ...calculatorValues,
+                    interestRate: Number(e.target.value)
+                  })}
+                  placeholder={t('loans.calculator.ratePlaceholder')}
+                  InputProps={{
+                    endAdornment: <span className="text-gray-500">%</span>
+                  }}
+                  fullWidth
+                />
+                
+                <TextField
+                  label={t('loans.calculator.depositYears')}
+                  type="number"
+                  value={calculatorValues.years}
+                  onChange={(e) => setCalculatorValues({
+                    ...calculatorValues,
+                    years: Number(e.target.value)
+                  })}
+                  placeholder={t('loans.calculator.yearsPlaceholder')}
+                  fullWidth
+                />
+                
+                <Button 
+                  variant="contained" 
+                  color="primary"
+                  onClick={calculateFDReturn}
+                  fullWidth
+                >
+                  {t('loans.calculator.calculate')}
+                </Button>
+              </div>
 
-            {calculatorResult && (
-              <Paper className="p-4 bg-blue-50">
-                <Typography variant="h6" className="mb-3">
-                  {t('loans.calculator.result.title')}
-                </Typography>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span>{t('loans.calculator.result.depositAmount')}:</span>
-                    <span className="font-bold">₹{calculatorResult.originalAmount.toLocaleString()}</span>
+              {calculatorResult && (
+                <Paper className="p-4 bg-blue-50">
+                  <Typography variant="h6" className="mb-3">
+                    {t('loans.calculator.result.title')}
+                  </Typography>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span>{t('loans.calculator.result.depositAmount')}:</span>
+                      <span className="font-bold">₹{calculatorResult.originalAmount.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>{t('loans.calculator.result.interestRate')}:</span>
+                      <span className="font-bold">{calculatorResult.interestRate}%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>{t('loans.calculator.result.timePeriod')}:</span>
+                      <span className="font-bold">{calculatorResult.years} {t('loans.duration.years')}</span>
+                    </div>
+                    <div className="flex justify-between text-green-700">
+                      <span>{t('loans.calculator.result.interestEarned')}:</span>
+                      <span className="font-bold">₹{calculatorResult.interestEarned.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-blue-700 font-bold">
+                      <span>{t('loans.calculator.result.totalAmount')}:</span>
+                      <span>₹{calculatorResult.totalAmount.toLocaleString()}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span>{t('loans.calculator.result.interestRate')}:</span>
-                    <span className="font-bold">{calculatorResult.interestRate}%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>{t('loans.calculator.result.timePeriod')}:</span>
-                    <span className="font-bold">{calculatorResult.years} {t('loans.duration.years')}</span>
-                  </div>
-                  <div className="flex justify-between text-green-700">
-                    <span>{t('loans.calculator.result.interestEarned')}:</span>
-                    <span className="font-bold">₹{calculatorResult.interestEarned.toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between text-blue-700 font-bold">
-                    <span>{t('loans.calculator.result.totalAmount')}:</span>
-                    <span>₹{calculatorResult.totalAmount.toLocaleString()}</span>
-                  </div>
-                </div>
-              </Paper>
-            )}
-          </div>
-        </Paper>
+                </Paper>
+              )}
+            </div>
+          </Paper>
+        </div>
       )}
     </div>
   );

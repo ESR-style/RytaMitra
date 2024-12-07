@@ -75,14 +75,18 @@ const RiskAnalysis = () => {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} md={6}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>{t('loans.analysis.title')}</Typography>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
+    <div className="p-2 md:p-6">
+      <Grid container spacing={3}>
+        {/* Form Section */}
+        <Grid item xs={12} lg={6}>
+          <Card className="h-full">
+            <CardContent className="space-y-4">
+              <Typography variant="h6" gutterBottom>
+                {t('loans.analysis.title')}
+              </Typography>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Make inputs stack vertically on mobile */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <TextField
                     fullWidth
                     label={t('loans.analysis.monthlyIncome')}
@@ -91,8 +95,6 @@ const RiskAnalysis = () => {
                     onChange={(e) => setFormData({...formData, monthlyIncome: e.target.value})}
                     required
                   />
-                </Grid>
-                <Grid item xs={12}>
                   <TextField
                     fullWidth
                     label={t('loans.analysis.existingLoans')}
@@ -101,8 +103,6 @@ const RiskAnalysis = () => {
                     onChange={(e) => setFormData({...formData, existingEMIs: e.target.value})}
                     required
                   />
-                </Grid>
-                <Grid item xs={12}>
                   <TextField
                     fullWidth
                     label={t('loans.analysis.expenses')}
@@ -111,8 +111,6 @@ const RiskAnalysis = () => {
                     onChange={(e) => setFormData({...formData, expenses: e.target.value})}
                     required
                   />
-                </Grid>
-                <Grid item xs={12}>
                   <TextField
                     fullWidth
                     label={t('loans.analysis.otherIncome')}
@@ -121,8 +119,6 @@ const RiskAnalysis = () => {
                     onChange={(e) => setFormData({...formData, otherIncome: e.target.value})}
                     helperText={t('loans.analysis.otherIncomeHelper')}
                   />
-                </Grid>
-                <Grid item xs={12}>
                   <TextField
                     fullWidth
                     label={t('loans.analysis.loanAmount')}
@@ -131,8 +127,6 @@ const RiskAnalysis = () => {
                     onChange={(e) => setFormData({...formData, loanAmount: e.target.value})}
                     required
                   />
-                </Grid>
-                <Grid item xs={12}>
                   <TextField
                     fullWidth
                     label={t('loans.analysis.loanTenure')}
@@ -141,8 +135,6 @@ const RiskAnalysis = () => {
                     onChange={(e) => setFormData({...formData, loanTenure: e.target.value})}
                     required
                   />
-                </Grid>
-                <Grid item xs={12}>
                   <TextField
                     fullWidth
                     label={t('loans.analysis.creditScore')}
@@ -151,79 +143,85 @@ const RiskAnalysis = () => {
                     onChange={(e) => setFormData({...formData, creditScore: e.target.value})}
                     required
                   />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button type="submit" variant="contained" fullWidth>
-                    {t('loans.analysis.analyze')}
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </CardContent>
-        </Card>
-      </Grid>
-      {analysis && (
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                {t('loans.analysis.simpleResults.title')}
-              </Typography>
-              
-              <Alert severity={analysis.canAffordLoan ? "success" : "error"}>
-                {t(`loans.analysis.simpleResults.${analysis.canAffordLoan ? 'canTakeLoan' : 'cannotTakeLoan'}`)}
-              </Alert>
-
-              <Box sx={{ mt: 3, mb: 2 }}>
-                <Alert severity={analysis.riskLevel === 'low' ? 'success' : analysis.riskLevel === 'medium' ? 'warning' : 'error'}>
-                  {t(`loans.analysis.simpleResults.riskLevels.${analysis.riskLevel}`)}
-                </Alert>
-              </Box>
-
-              <Stack spacing={2}>
-                <Typography variant="body1">
-                  {t('loans.analysis.simpleResults.maxLoanPossible', {
-                    amount: formatIndianCurrency(analysis.maxEligibleAmount)
-                  })}
-                </Typography>
-                
-                <Typography variant="body1">
-                  {t('loans.analysis.simpleResults.monthlyPayment', {
-                    amount: formatIndianCurrency(analysis.proposedEMI)
-                  })}
-                </Typography>
-
-                <Typography variant="body1">
-                  {t('loans.analysis.simpleResults.monthlyCapacity', {
-                    amount: formatIndianCurrency(analysis.monthlyEMICapacity)
-                  })}
-                </Typography>
-
-                <Typography variant="body1">
-                  {t('loans.analysis.simpleResults.surplus', {
-                    amount: formatIndianCurrency(analysis.monthlySurplus)
-                  })}
-                </Typography>
-
-                <Typography variant="body1">
-                  {t('loans.analysis.simpleResults.savingSuggestion', {
-                    amount: formatIndianCurrency(analysis.recommendedSavings)
-                  })}
-                </Typography>
-              </Stack>
-
-              <Box sx={{ mt: 3 }}>
-                <Alert severity="info">
-                  {t(`loans.analysis.simpleResults.recommendations.${analysis.canAffordLoan ? 'good' : 'bad'}`)}
-                  <br />
-                  {t('loans.analysis.simpleResults.recommendations.savings')}
-                </Alert>
-              </Box>
+                </div>
+                <Button 
+                  type="submit" 
+                  variant="contained" 
+                  fullWidth 
+                  size="large"
+                  className="mt-4"
+                >
+                  {t('loans.analysis.analyze')}
+                </Button>
+              </form>
             </CardContent>
           </Card>
         </Grid>
-      )}
-    </Grid>
+
+        {/* Results Section */}
+        {analysis && (
+          <Grid item xs={12} lg={6}>
+            <Card className="h-full">
+              <CardContent className="space-y-4">
+                <Typography variant="h6" gutterBottom>
+                  {t('loans.analysis.simpleResults.title')}
+                </Typography>
+                
+                <Alert severity={analysis.canAffordLoan ? "success" : "error"}>
+                  {t(`loans.analysis.simpleResults.${analysis.canAffordLoan ? 'canTakeLoan' : 'cannotTakeLoan'}`)}
+                </Alert>
+
+                <Box sx={{ mt: 3, mb: 2 }}>
+                  <Alert severity={analysis.riskLevel === 'low' ? 'success' : analysis.riskLevel === 'medium' ? 'warning' : 'error'}>
+                    {t(`loans.analysis.simpleResults.riskLevels.${analysis.riskLevel}`)}
+                  </Alert>
+                </Box>
+
+                <Stack spacing={2}>
+                  <Typography variant="body1">
+                    {t('loans.analysis.simpleResults.maxLoanPossible', {
+                      amount: formatIndianCurrency(analysis.maxEligibleAmount)
+                    })}
+                  </Typography>
+                  
+                  <Typography variant="body1">
+                    {t('loans.analysis.simpleResults.monthlyPayment', {
+                      amount: formatIndianCurrency(analysis.proposedEMI)
+                    })}
+                  </Typography>
+
+                  <Typography variant="body1">
+                    {t('loans.analysis.simpleResults.monthlyCapacity', {
+                      amount: formatIndianCurrency(analysis.monthlyEMICapacity)
+                    })}
+                  </Typography>
+
+                  <Typography variant="body1">
+                    {t('loans.analysis.simpleResults.surplus', {
+                      amount: formatIndianCurrency(analysis.monthlySurplus)
+                    })}
+                  </Typography>
+
+                  <Typography variant="body1">
+                    {t('loans.analysis.simpleResults.savingSuggestion', {
+                      amount: formatIndianCurrency(analysis.recommendedSavings)
+                    })}
+                  </Typography>
+                </Stack>
+
+                <Box sx={{ mt: 3 }}>
+                  <Alert severity="info">
+                    {t(`loans.analysis.simpleResults.recommendations.${analysis.canAffordLoan ? 'good' : 'bad'}`)}
+                    <br />
+                    {t('loans.analysis.simpleResults.recommendations.savings')}
+                  </Alert>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        )}
+      </Grid>
+    </div>
   );
 };
 

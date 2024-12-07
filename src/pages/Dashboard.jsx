@@ -58,24 +58,24 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
+    <div className="p-3 sm:p-6 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 space-y-3 sm:space-y-0">
         <p className="text-gray-600">{t('dashboard.today')}: {formatDate(new Date())}</p>
-        <div className="flex space-x-4">
+        <div className="flex flex-wrap gap-2 sm:space-x-4">
           <Ramanna />
-          <button className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200">
+          <button className="w-full sm:w-auto px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200">
             🔔 {t('dashboard.notifications')}
           </button>
           <button 
             onClick={() => navigate('/transaction')}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+            className="w-full sm:w-auto px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
           >
             + {t('dashboard.addTransaction')}
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <DashboardCard 
           title={t('dashboard.totalBalance')}
           value="₹45,000"
@@ -97,9 +97,9 @@ const Dashboard = () => {
         />
       </div>
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <div className="lg:col-span-2">
-          <div className="bg-white p-6 rounded-xl shadow-md border border-emerald-100">
+          <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-emerald-100">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold text-emerald-800">{t('dashboard.recentTransactions')}</h2>
               <button className="text-emerald-600 hover:text-emerald-700">{t('dashboard.viewAll')} →</button>
@@ -126,7 +126,7 @@ const Dashboard = () => {
         </div>
 
         <div className="lg:col-span-1">
-          <div className="bg-white p-6 rounded-xl shadow-md border border-emerald-100">
+          <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-emerald-100">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold text-emerald-800">{t('dashboard.activeSchemes')}</h2>
               <button className="text-emerald-600 hover:text-emerald-700">{t('dashboard.viewAll')} →</button>
@@ -154,13 +154,13 @@ const Dashboard = () => {
       </div>
 
       {/* Improved Voice Commands Section */}
-      <div className="mt-6">
-        <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-100">
+      <div className="mt-4 sm:mt-6">
+        <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-4 sm:p-6 rounded-xl border border-blue-100">
           <h3 className="text-lg font-medium text-blue-800 mb-4">
             <span className="mr-2">🎤</span>
             {t('dashboard.voiceCommands')}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {Object.entries(voiceCommandsList).map(([command, description]) => (
               <div key={command} 
                    className="flex items-center space-x-2 bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow"

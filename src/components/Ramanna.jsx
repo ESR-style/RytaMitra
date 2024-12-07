@@ -92,54 +92,63 @@ const Ramanna = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 w-96 mt-2 bg-white rounded-lg shadow-xl border border-emerald-100 z-50">
-          <div className="p-4 border-b border-emerald-100">
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-medium">ರಮಣ್ಣನೊಂದಿಗೆ ಮಾತನಾಡಿ</h3>
-              <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700">✕</button>
+        <>
+          {/* Mobile overlay */}
+          <div className="fixed inset-0 bg-black bg-opacity-50 sm:hidden z-40" 
+               onClick={() => setIsOpen(false)} />
+          
+          {/* Chat modal */}
+          <div className="fixed sm:absolute bottom-0 sm:bottom-auto left-0 right-0 sm:right-0 sm:left-auto 
+                        w-full sm:w-96 bg-white rounded-t-lg sm:rounded-lg shadow-xl border border-emerald-100 
+                        z-50 sm:mt-2">
+            <div className="p-4 border-b border-emerald-100">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-medium">ರಮಣ್ಣನೊಂದಿಗೆ ಮಾತನಾಡಿ</h3>
+                <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700">✕</button>
+              </div>
+            </div>
+
+            <div ref={chatContainerRef} className="h-96 overflow-y-auto p-4 space-y-4">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[80%] p-3 rounded-lg ${
+                      message.type === 'user'
+                        ? 'bg-emerald-100 text-emerald-900'
+                        : 'bg-gray-100 text-gray-900'
+                    }`}
+                  >
+                    {message.text}
+                  </div>
+                </div>
+              ))}
+              {loading && (
+                <div className="flex justify-start">
+                  <div className="bg-gray-100 p-3 rounded-lg">
+                    ಯೋಚಿಸುತ್ತಿದ್ದೇನೆ...
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="p-4 border-t border-emerald-100">
+              <button
+                onClick={startListening}
+                disabled={isListening}
+                className={`w-full px-4 py-2 rounded-lg ${
+                  isListening
+                    ? 'bg-red-500 text-white'
+                    : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                }`}
+              >
+                {isListening ? 'ಆಲಿಸುತ್ತಿದ್ದೇನೆ...' : 'ಮಾತನಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ'}
+              </button>
             </div>
           </div>
-
-          <div ref={chatContainerRef} className="h-96 overflow-y-auto p-4 space-y-4">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
-                    message.type === 'user'
-                      ? 'bg-emerald-100 text-emerald-900'
-                      : 'bg-gray-100 text-gray-900'
-                  }`}
-                >
-                  {message.text}
-                </div>
-              </div>
-            ))}
-            {loading && (
-              <div className="flex justify-start">
-                <div className="bg-gray-100 p-3 rounded-lg">
-                  ಯೋಚಿಸುತ್ತಿದ್ದೇನೆ...
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="p-4 border-t border-emerald-100">
-            <button
-              onClick={startListening}
-              disabled={isListening}
-              className={`w-full px-4 py-2 rounded-lg ${
-                isListening
-                  ? 'bg-red-500 text-white'
-                  : 'bg-emerald-600 text-white hover:bg-emerald-700'
-              }`}
-            >
-              {isListening ? 'ಆಲಿಸುತ್ತಿದ್ದೇನೆ...' : 'ಮಾತನಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ'}
-            </button>
-          </div>
-        </div>
+        </>
       )}
     </div>
   );

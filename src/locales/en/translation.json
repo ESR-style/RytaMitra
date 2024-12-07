@@ -59,7 +59,13 @@
       "averagePerCow": "Average per Cow (L)",
       "weeklyOverview": "Weekly Production Overview",
       "dailyStats": "Daily Production",
-      "cowCount": "Total Cows"
+      "cowCount": "Total Cows",
+      "addNew": "Add New Cow",
+      "addNewCow": "Add New Cow Details",
+      "count": "Number of Cows",
+      "production": "Daily Milk Production (L)",
+      "delete": "Delete All",
+      "deleteConfirm": "Are you sure you want to delete all cow data? This action cannot be undone."
     },
     "poultry": {
       "title": "Poultry Management",
@@ -70,7 +76,13 @@
       "averagePerBird": "Average per Bird",
       "weeklyOverview": "Weekly Egg Production",
       "dailyStats": "Daily Eggs",
-      "birdCount": "Total Birds"
+      "birdCount": "Total Birds",
+      "addNew": "Add New Bird",
+      "addNewBird": "Add New Bird Details",
+      "count": "Number of Birds",
+      "production": "Daily Egg Production",
+      "delete": "Delete All",
+      "deleteConfirm": "Are you sure you want to delete all chicken data? This action cannot be undone."
     }
   },
   "charts": {
@@ -105,7 +117,9 @@
     "filter": "Filter transactions",
     "date": "Date",
     "description": "Description",
-    "amount": "Amount"
+    "amount": "Amount",
+    "add": "Add Transaction",
+    "addNew": "Add New Transaction"
   },
   "schemes": {
     "pmKisan": "PM Kisan",
@@ -114,5 +128,9 @@
   "status": {
     "active": "Active",
     "pending": "Pending"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

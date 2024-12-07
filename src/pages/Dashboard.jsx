@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardCard = ({ title, value, icon, trend, trendValue }) => (
   <div className="bg-white p-6 rounded-xl shadow-md border border-emerald-100 hover:shadow-lg transition-shadow">
@@ -31,6 +32,7 @@ const voiceCommandsList = {
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const formatDate = (date) => {
     if (i18n.language === 'kn') {
@@ -62,7 +64,10 @@ const Dashboard = () => {
           <button className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200">
             🔔 {t('dashboard.notifications')}
           </button>
-          <button className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">
+          <button 
+            onClick={() => navigate('/transaction')}
+            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+          >
             + {t('dashboard.addTransaction')}
           </button>
         </div>

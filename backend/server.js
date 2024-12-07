@@ -16,7 +16,7 @@ const pool = new Pool({
 
 // Database initialization
 const initDb = async () => {
-  try {
+  try { 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS transactions (
         id SERIAL PRIMARY KEY,
@@ -75,6 +75,16 @@ app.get('/api/transactions', async (req, res) => {
     res.status(500).json({ error: err.message })
   }
 })
+
+// Add this new endpoint before the existing livestock endpoints
+app.delete('/api/livestock/:type', async (req, res) => {
+  try {
+    await pool.query('DELETE FROM livestock WHERE type = $1', [req.params.type]);
+    res.json({ message: 'Livestock data deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Endpoints for livestock
 app.post('/api/livestock', async (req, res) => {

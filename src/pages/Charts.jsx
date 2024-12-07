@@ -5,6 +5,12 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
 } from 'recharts';
 import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/solid';
+import { 
+  CurrencyRupeeIcon, 
+  ChartBarIcon, 
+  ArrowTrendingUpIcon,
+  QuestionMarkCircleIcon 
+} from '@heroicons/react/24/outline';
 
 const COLORS = ['#10B981', '#3B82F6', '#FBBF24', '#EF4444', '#8B5CF6', '#EC4899'];
 
@@ -79,41 +85,68 @@ const Charts = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <div className="mb-6">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 mb-4">
+          <ChartBarIcon className="w-8 h-8 text-emerald-600" />
           <h1 className="text-2xl font-bold text-emerald-800">{t('charts.title')}</h1>
-          <div className="flex items-center gap-2">
-            {trend !== 0 && (
-              <div className={`flex items-center ${trend > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {trend > 0 ? <ArrowUpIcon className="w-5 h-5" /> : <ArrowDownIcon className="w-5 h-5" />}
-                <span className="ml-1">{Math.abs(trend).toFixed(1)}%</span>
-              </div>
-            )}
+        </div>
+
+        {/* Simple explanation box */}
+        <div className="bg-emerald-50 p-4 rounded-lg mb-6">
+          <div className="flex items-start gap-3">
+            <QuestionMarkCircleIcon className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-1" />
+            <div>
+              <p className="text-emerald-800 font-medium mb-2">{t('charts.helper.whatIsThis')}</p>
+              <p className="text-emerald-700 text-sm">{t('charts.helper.explanation')}</p>
+            </div>
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-4">
-          <select
-            className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500"
-            value={dateRange}
-            onChange={(e) => setDateRange(e.target.value)}
-          >
-            <option value="week">{t('charts.dateRanges.week')}</option>
-            <option value="month">{t('charts.dateRanges.month')}</option>
-            <option value="year">{t('charts.dateRanges.year')}</option>
-          </select>
+        <div className="flex flex-wrap gap-4 mb-6">
+          <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+            <CurrencyRupeeIcon className="w-5 h-5 text-emerald-600" />
+            <select
+              className="border-none focus:ring-0 text-lg font-medium text-gray-700"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {Object.keys(rawData).map(cat => (
+                <option key={cat} value={cat}>
+                  {t(`charts.categories.simple.${cat}`)}
+                </option>
+              ))}
+            </select>
+          </div>
 
-          <select
-            className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            {Object.keys(rawData).map(cat => (
-              <option key={cat} value={cat}>
-                {t(`charts.categories.${cat}`)}
-              </option>
-            ))}
-          </select>
+          <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+            <ArrowTrendingUpIcon className="w-5 h-5 text-emerald-600" />
+            <select
+              className="border-none focus:ring-0 text-lg font-medium text-gray-700"
+              value={dateRange}
+              onChange={(e) => setDateRange(e.target.value)}
+            >
+              <option value="week">{t('charts.dateRanges.simple.week')}</option>
+              <option value="month">{t('charts.dateRanges.simple.month')}</option>
+              <option value="year">{t('charts.dateRanges.simple.year')}</option>
+            </select>
+          </div>
         </div>
+
+        {/* Trend indicator with explanation */}
+        {trend !== 0 && (
+          <div className={`flex items-center gap-2 p-3 rounded-lg mb-6 ${
+            trend > 0 ? 'bg-green-50' : 'bg-red-50'
+          }`}>
+            {trend > 0 ? (
+              <ArrowUpIcon className="w-5 h-5 text-green-600" />
+            ) : (
+              <ArrowDownIcon className="w-5 h-5 text-red-600" />
+            )}
+            <span className={`text-lg ${trend > 0 ? 'text-green-700' : 'text-red-700'}`}>
+              {trend > 0 ? t('charts.trend.increase') : t('charts.trend.decrease')}
+              {' '}({Math.abs(trend).toFixed(1)}%)
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -186,6 +219,25 @@ const Charts = () => {
             </PieChart>
           </ResponsiveContainer>
         </div>
+      </div>
+
+      {/* Help section */}
+      <div className="mt-8 bg-blue-50 p-4 rounded-lg">
+        <h4 className="font-medium text-blue-800 mb-2">{t('charts.help.title')}</h4>
+        <ul className="space-y-2">
+          <li className="flex items-start gap-2">
+            <div className="w-4 h-4 mt-1 rounded-full bg-emerald-500 flex-shrink-0" />
+            <span className="text-blue-800">{t('charts.help.barChart')}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <div className="w-4 h-4 mt-1 rounded-full bg-blue-500 flex-shrink-0" />
+            <span className="text-blue-800">{t('charts.help.lineChart')}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <div className="w-4 h-4 mt-1 rounded-full bg-yellow-500 flex-shrink-0" />
+            <span className="text-blue-800">{t('charts.help.pieChart')}</span>
+          </li>
+        </ul>
       </div>
     </div>
   );

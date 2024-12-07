@@ -86,11 +86,10 @@
     }
   },
   "charts": {
-    "title": "Farm Analytics",
-    "filters": {
-      "dateRange": "Date Range",
-      "category": "Category",
-      "type": "Chart Type"
+    "title": "Your Farm's Story in Pictures",
+    "helper": {
+      "whatIsThis": "What am I looking at?",
+      "explanation": "These pictures show how your farm is doing. They help you see your income, expenses, and growth easily."
     },
     "categories": {
       "income": "Income",
@@ -101,7 +100,13 @@
       "seeds": "Seeds",
       "feed": "Animal Feed",
       "fertilizer": "Fertilizer",
-      "labor": "Labor"
+      "labor": "Labor",
+      "simple": {
+        "income": "Money Coming In",
+        "expenses": "Money Going Out",
+        "crops": "Your Crops",
+        "livestock": "Your Animals"
+      }
     },
     "metrics": {
       "distribution": "Distribution Overview",
@@ -128,12 +133,27 @@
     "dateRanges": {
       "week": "This Week",
       "month": "This Month",
-      "year": "This Year"
+      "year": "This Year",
+      "simple": {
+        "week": "This Week",
+        "month": "This Month",
+        "year": "This Year"
+      }
     },
     "chartHelp": {
       "pie": "Shows distribution of values as percentages",
       "bar": "Compare values across categories",
       "line": "Track trends over time"
+    },
+    "trend": {
+      "increase": "Things are getting better",
+      "decrease": "Things need attention"
+    },
+    "help": {
+      "title": "How to Read These Pictures",
+      "barChart": "The tall bars show bigger numbers - taller is better for income, shorter is better for expenses",
+      "lineChart": "The line shows changes over time - going up means increase, going down means decrease",
+      "pieChart": "The circle is divided into parts - bigger parts mean bigger portions of your total"
     }
   },
   "transactions": {

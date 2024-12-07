@@ -6,15 +6,23 @@ i18n
   .use(Backend)
   .use(initReactI18next)
   .init({
-    supportedLngs: ['en', 'kn', 'te', 'ta', 'hi'], // Make sure 'ta' is included
+    supportedLngs: ['en', 'kn', 'te', 'ta', 'hi'],
     fallbackLng: 'en',
-    debug: true,
+    debug: process.env.NODE_ENV === 'development',
     backend: {
-      loadPath: '/public/locales/{{lng}}/translation.json',
+      loadPath: '/locales/{{lng}}/translation.json',
+      addPath: '/locales/add/{{lng}}/{{ns}}',
     },
     interpolation: {
       escapeValue: false,
+    },
+    react: {
+      useSuspense: false
     }
   });
+
+i18n.on('failedLoading', (lng, ns, msg) => {
+  console.error(`Failed loading translation: ${lng}`, msg);
+});
 
 export default i18n;

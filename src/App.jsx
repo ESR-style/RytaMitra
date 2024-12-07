@@ -7,16 +7,25 @@ import useVoiceCommands from './hooks/useVoiceCommands';
 const App = () => {
   const { isListening, toggleListening } = useVoiceCommands();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex h-screen overflow-hidden">
-        <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <Topbar isCollapsed={isCollapsed} />
-          <main className={`flex-1 overflow-y-auto p-4 transition-all duration-300 ${
-            isCollapsed ? 'ml-20' : 'ml-72'
-          }`}>
+      <div className="flex min-h-screen relative">
+        <Sidebar 
+          isCollapsed={isCollapsed} 
+          setIsCollapsed={setIsCollapsed}
+          isMobileMenuOpen={isMobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+        />
+        <div className="flex-1 flex flex-col min-h-screen w-full">
+          <Topbar 
+            isCollapsed={isCollapsed} 
+            setMobileMenuOpen={setMobileMenuOpen} 
+          />
+          <main className={`flex-1 p-4 transition-all duration-300 
+            md:pl-[${isCollapsed ? '5rem' : '18rem'}]
+            w-full mt-16`}>
             <Outlet />
           </main>
           <button

@@ -211,7 +211,32 @@
         "low": "Low Risk",
         "medium": "Medium Risk",
         "high": "High Risk"
-      }
+      },
+      "simpleResults": {
+        "title": "Loan Analysis Results",
+        "canTakeLoan": "✅ You can safely take this loan",
+        "cannotTakeLoan": "⚠️ This loan might be risky for you",
+        "maxLoanPossible": "Maximum loan you can take: ₹{{amount}}",
+        "monthlyPayment": "Monthly payment will be: ₹{{amount}}",
+        "monthlyCapacity": "You can afford to pay: ₹{{amount}} per month",
+        "surplus": "Money left after all payments: ₹{{amount}} per month",
+        "savingSuggestion": "You should try to save: ₹{{amount}} per month",
+        "riskLevels": {
+          "low": "Your financial health looks good 😊",
+          "medium": "Be careful with your expenses 🤔",
+          "high": "This might be difficult to manage ⚠️"
+        },
+        "recommendations": {
+          "good": "This loan seems manageable for your income",
+          "bad": "This loan amount is too high for your current income",
+          "savings": "Make sure to keep some money aside for emergencies"
+        }
+      },
+      "otherIncome": "Other Income (Yearly)",
+      "otherIncomeHelper": "Include seasonal farm income, rental income, etc.",
+      "loanAmount": "Required Loan Amount",
+      "loanTenure": "Loan Duration (Years)",
+      "analyze": "Analyze Loan Risk"
     },
     "form": {
       "bankName": "Bank Name",

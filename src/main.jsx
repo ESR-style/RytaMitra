@@ -15,6 +15,7 @@ import Cow from './pages/Cow.jsx';
 import Chicken from './pages/Chicken.jsx';
 import Scheme from './pages/Scheme.jsx';
 import Animals from './pages/Animals.jsx';
+import SchemeDetails from './pages/SchemeDetails.jsx';
 import './i18n';
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/scheme",
         element: <Scheme/>,
+      },
+      {
+        path: "/scheme/:id",
+        element: <SchemeDetails/>,
       },
       {
         path: "/animals",

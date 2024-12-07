@@ -93,16 +93,47 @@
       "type": "Chart Type"
     },
     "categories": {
-      "income": "Income Analysis",
-      "livestock": "Livestock Stats",
-      "crops": "Crop Performance",
-      "expenses": "Expense Breakdown"
+      "income": "Income",
+      "expenses": "Expenses",
+      "crops": "Crops",
+      "dairy": "Dairy",
+      "poultry": "Poultry",
+      "seeds": "Seeds",
+      "feed": "Animal Feed",
+      "fertilizer": "Fertilizer",
+      "labor": "Labor"
     },
     "metrics": {
-      "dailyIncome": "Daily Income",
+      "distribution": "Distribution Overview",
+      "trends": "Trend Analysis",
       "monthlyRevenue": "Monthly Revenue",
-      "productionTrends": "Production Trends",
-      "profitMargins": "Profit Margins"
+      "productionTrends": "Production Trends"
+    },
+    "insights": {
+      "income": "💡 Larger segments in the pie chart show your main income sources. Taller bars in the trend chart show better performance.",
+      "expenses": "💡 The charts show where you spend the most money. Look for unusually high expenses to find saving opportunities.",
+      "crops": "Review your crop performance across different categories"
+    },
+    "common": {
+      "week1": "Week 1",
+      "week2": "Week 2",
+      "week3": "Week 3",
+      "week4": "Week 4"
+    },
+    "chartTypes": {
+      "bar": "Bar Chart",
+      "line": "Line Chart",
+      "pie": "Pie Chart"
+    },
+    "dateRanges": {
+      "week": "This Week",
+      "month": "This Month",
+      "year": "This Year"
+    },
+    "chartHelp": {
+      "pie": "Shows distribution of values as percentages",
+      "bar": "Compare values across categories",
+      "line": "Track trends over time"
     }
   },
   "transactions": {

@@ -106,8 +106,9 @@ const SchemeDetails = () => {
                   window.open('https://kmdc.karnataka.gov.in', '_blank');
                 } else if (id === 'pmfby') {
                   window.open('https://pmfby.gov.in', '_blank');
+                } else if (id === 'kisan-credit') {
+                  window.open('https://www.sbi.co.in', '_blank');
                 }
-                // Add other scheme links as needed
               }}
               className="bg-green-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-600"
             >

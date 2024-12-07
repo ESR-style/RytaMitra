@@ -43,7 +43,7 @@ const initDb = async () => {
           monthly_payment DECIMAL(10,2) NOT NULL,
           remaining_amount DECIMAL(10,2) NOT NULL,
           status VARCHAR(50) DEFAULT 'active',
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
       `);
       
@@ -223,7 +223,7 @@ app.post('/api/farmer-loans', async (req, res) => {
 app.get('/api/farmer-loans', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT * FROM farmer_loans ORDER BY created_at DESC'
+      'SELECT * FROM farmer_loans ORDER BY id DESC'
     );
     
     // Check if database query was successful

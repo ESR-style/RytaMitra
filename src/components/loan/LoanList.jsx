@@ -24,11 +24,11 @@ const LoanList = ({ loans }) => {
               <TableCell>{loan.bank_name}</TableCell>
               <TableCell>{loan.loan_type}</TableCell>
               <TableCell>₹{Number(loan.amount).toLocaleString()}</TableCell>
-              <TableCell>₹{Number(loan.monthly_payment).toLocaleString()}</TableCell>
-              <TableCell>₹{Number(loan.remaining_amount).toLocaleString()}</TableCell>
+              <TableCell>₹{Number(loan.monthly_payment || 0).toLocaleString()}</TableCell>
+              <TableCell>₹{Number(loan.remaining_amount || 0).toLocaleString()}</TableCell>
               <TableCell>
                 <Chip
-                  label={loan.status}
+                  label={loan.status || 'active'}
                   color={loan.status === 'active' ? 'success' : 'error'}
                   size="small"
                 />

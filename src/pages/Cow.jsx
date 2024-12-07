@@ -95,19 +95,19 @@ const Cow = () => {
 
   return (
     <div className="p-6 bg-gray-50">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <h1 className="text-3xl font-bold text-gray-800">{t('animals.dairy.title')}</h1>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4 w-full sm:w-auto">
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="flex-1 sm:flex-none bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             {t('animals.dairy.addNew')}
           </button>
           {milkData.totalCows > 0 && (
             <button
               onClick={handleDelete}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center gap-2"
+              className="flex-1 sm:flex-none bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center justify-center gap-2"
             >
               <FaTrash /> {t('animals.dairy.delete')}
             </button>

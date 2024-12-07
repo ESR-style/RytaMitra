@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import Ramanna from '../components/Ramanna';
 
 const DashboardCard = ({ title, value, icon, trend, trendValue }) => (
   <div className="bg-white p-6 rounded-xl shadow-md border border-emerald-100 hover:shadow-lg transition-shadow">
@@ -61,6 +62,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-center mb-6">
         <p className="text-gray-600">{t('dashboard.today')}: {formatDate(new Date())}</p>
         <div className="flex space-x-4">
+          <Ramanna />
           <button className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200">
             🔔 {t('dashboard.notifications')}
           </button>
@@ -173,7 +175,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

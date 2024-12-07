@@ -73,7 +73,7 @@ const Ramanna = () => {
   const getAIResponse = async (userInput) => {
     setLoading(true);
     try {
-      const prompt = `You are Ramanna, a helpful assistant who ONLY speaks Kannada. 
+      const prompt = `You are Ramanna a financial assistant to farmers who talks like a farmer in kannada and helps famrmers get financial advice, a helpful assistant who ONLY speaks Kannada. 
                      You must respond in Kannada script (ಕನ್ನಡ) only.
                      User's question: ${userInput}
                      Remember: Only use Kannada script in your response.`;

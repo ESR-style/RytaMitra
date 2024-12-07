@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -24,13 +23,14 @@ const LoanList = ({ loans }) => {
             <TableRow key={loan.id}>
               <TableCell>{loan.bank_name}</TableCell>
               <TableCell>{loan.loan_type}</TableCell>
-              <TableCell>₹{loan.amount}</TableCell>
-              <TableCell>₹{loan.monthly_payment}</TableCell>
-              <TableCell>₹{loan.remaining_amount}</TableCell>
+              <TableCell>₹{Number(loan.amount).toLocaleString()}</TableCell>
+              <TableCell>₹{Number(loan.monthly_payment).toLocaleString()}</TableCell>
+              <TableCell>₹{Number(loan.remaining_amount).toLocaleString()}</TableCell>
               <TableCell>
                 <Chip
-                  label={t(`loans.status.${loan.status}`)}
+                  label={loan.status}
                   color={loan.status === 'active' ? 'success' : 'error'}
+                  size="small"
                 />
               </TableCell>
             </TableRow>

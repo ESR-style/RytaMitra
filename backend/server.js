@@ -14,83 +14,50 @@ const pool = new Pool({
   port: 5432,
 })
 
+// Add error handling for database connection
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client', err);
+  process.exit(-1);
+});
+
 // Database initialization
 const initDb = async () => {
-  try { 
-    // First drop the existing table
-    await pool.query('DROP TABLE IF EXISTS crop_transactions;');
+  try {
+    // Test database connection
+    const client = await pool.connect();
     
-    // Then recreate with consistent naming
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS transactions (
-        id SERIAL PRIMARY KEY,
-        type VARCHAR(10) NOT NULL,
-        amount DECIMAL(10,2) NOT NULL,
-        description TEXT,
-        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-
-      CREATE TABLE IF NOT EXISTS livestock (
-        id SERIAL PRIMARY KEY,
-        type VARCHAR(50) NOT NULL,
-        count INTEGER NOT NULL,
-        daily_production DECIMAL(10,2),
-        last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-
-      CREATE TABLE IF NOT EXISTS crops (
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
-        area_planted DECIMAL(10,2),
-        planting_date DATE,
-        expected_harvest DATE,
-        status VARCHAR(50)
-      );
-
-      CREATE TABLE IF NOT EXISTS crop_transactions (
-        id SERIAL PRIMARY KEY,
-        item_name VARCHAR(100) NOT NULL,
-        quantity DECIMAL(10,2) NOT NULL,
-        price DECIMAL(10,2) NOT NULL,
-        buyer_name VARCHAR(100) NOT NULL,
-        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-
-      CREATE TABLE IF NOT EXISTS farmer_loans (
-        id SERIAL PRIMARY KEY,
-        farmer_id INTEGER,
-        bank_name VARCHAR(100),
-        loan_type VARCHAR(100),
-        amount DECIMAL(10,2),
-        interest_rate DECIMAL(5,2),
-        start_date DATE,
-        end_date DATE,
-        monthly_payment DECIMAL(10,2),
-        remaining_amount DECIMAL(10,2),
-        status VARCHAR(50)
-      );
-
-      CREATE TABLE IF NOT EXISTS bank_loan_offers (
-        id SERIAL PRIMARY KEY,
-        bank_name VARCHAR(100),
-        loan_type VARCHAR(100),
-        interest_rate_min DECIMAL(5,2),
-        interest_rate_max DECIMAL(5,2),
-        special_features TEXT,
-        eligibility_criteria TEXT
-      );
-
-      CREATE TABLE IF NOT EXISTS fd_rates (
-        id SERIAL PRIMARY KEY,
-        bank_name VARCHAR(100),
-        duration_days INTEGER,
-        interest_rate DECIMAL(5,2)
-      );
-    `)
-    console.log('Database tables initialized')
+    try {
+      await client.query('BEGIN');
+      
+      // Create farmer_loans table with proper constraints
+      await client.query(`
+        CREATE TABLE IF NOT EXISTS farmer_loans (
+          id SERIAL PRIMARY KEY,
+          farmer_id INTEGER NOT NULL,
+          bank_name VARCHAR(100) NOT NULL,
+          loan_type VARCHAR(100) NOT NULL,
+          amount DECIMAL(10,2) NOT NULL,
+          interest_rate DECIMAL(5,2) NOT NULL,
+          start_date DATE NOT NULL,
+          end_date DATE NOT NULL,
+          monthly_payment DECIMAL(10,2) NOT NULL,
+          remaining_amount DECIMAL(10,2) NOT NULL,
+          status VARCHAR(50) DEFAULT 'active',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+      
+      await client.query('COMMIT');
+      console.log('Database tables initialized successfully');
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
   } catch (err) {
-    console.error('Database initialization error:', err)
-    process.exit(1)
+    console.error('Database initialization error:', err);
+    process.exit(1);
   }
 }
 
@@ -207,20 +174,70 @@ app.get('/api/crop-transactions', async (req, res) => {
 
 // Add new endpoints for loan management
 app.post('/api/farmer-loans', async (req, res) => {
+  const client = await pool.connect();
+  
   try {
-    const { farmer_id, bank_name, loan_type, amount, interest_rate, start_date, end_date } = req.body;
-    const monthly_payment = calculateMonthlyPayment(amount, interest_rate, start_date, end_date);
+    const { bank_name, loan_type, amount, interest_rate, start_date, end_date } = req.body;
     
-    const result = await pool.query(
-      `INSERT INTO farmer_loans 
-       (farmer_id, bank_name, loan_type, amount, interest_rate, start_date, end_date, monthly_payment, remaining_amount, status) 
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $4, 'active') 
-       RETURNING *`,
-      [farmer_id, bank_name, loan_type, amount, interest_rate, start_date, end_date, monthly_payment]
+    // Validate inputs
+    if (!amount || !interest_rate || !start_date || !end_date || !bank_name) {
+      return res.status(400).json({ 
+        error: 'Missing required loan details'
+      });
+    }
+
+    const monthly_payment = calculateMonthlyPayment(
+      Number(amount),
+      Number(interest_rate),
+      start_date,
+      end_date
     );
+
+    await client.query('BEGIN');
+    
+    const result = await client.query(
+      `INSERT INTO farmer_loans 
+       (farmer_id, bank_name, loan_type, amount, interest_rate, start_date, end_date, 
+        monthly_payment, remaining_amount, status) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, 'active') 
+       RETURNING *`,
+      [1, bank_name, loan_type || 'General', amount, interest_rate, start_date, end_date, 
+       monthly_payment, amount]
+    );
+
+    await client.query('COMMIT');
     res.json(result.rows[0]);
+    
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    await client.query('ROLLBACK');
+    console.error('Error adding loan:', err);
+    res.status(500).json({ 
+      error: 'Failed to add loan',
+      details: err.message
+    });
+  } finally {
+    client.release();
+  }
+});
+
+app.get('/api/farmer-loans', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM farmer_loans ORDER BY created_at DESC'
+    );
+    
+    // Check if database query was successful
+    if (!result || !result.rows) {
+      throw new Error('Failed to fetch loans data');
+    }
+    
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ 
+      error: 'Failed to fetch loans',
+      details: err.message 
+    });
   }
 });
 
@@ -267,11 +284,40 @@ app.post('/api/loan-risk-analysis', async (req, res) => {
   }
 });
 
+// Add a new endpoint to get loan statistics
+app.get('/api/farmer-loans/stats', async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        COUNT(*) as total_loans,
+        SUM(amount) as total_amount,
+        SUM(remaining_amount) as total_remaining,
+        SUM(monthly_payment) as total_monthly_payment
+      FROM farmer_loans 
+      WHERE status = 'active'
+    `);
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Helper function to calculate monthly loan payment
 function calculateMonthlyPayment(principal, annualRate, startDate, endDate) {
-  const monthlyRate = annualRate / 12 / 100;
+  if (!principal || !annualRate || !startDate || !endDate) {
+    throw new Error('Missing required parameters for EMI calculation');
+  }
+
+  const monthlyRate = (annualRate / 12) / 100;
   const durationMonths = Math.ceil((new Date(endDate) - new Date(startDate)) / (30 * 24 * 60 * 60 * 1000));
-  return (principal * monthlyRate * Math.pow(1 + monthlyRate, durationMonths)) / (Math.pow(1 + monthlyRate, durationMonths) - 1);
+  
+  if (durationMonths <= 0) {
+    throw new Error('Invalid loan duration');
+  }
+
+  const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, durationMonths)) / 
+             (Math.pow(1 + monthlyRate, durationMonths) - 1);
+  return Math.round(emi * 100) / 100;
 }
 
 const PORT = process.env.PORT || 5000

@@ -33,14 +33,14 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileMenuOpen, setMobileMenuO
       )}
       
       <aside className={`
-        fixed md:static top-0 bottom-0 left-0
+        fixed top-0 left-0
         flex flex-col
         ${isCollapsed ? 'w-20' : 'w-72'}
         transition-all duration-300 
         bg-emerald-800 text-white
-        md:translate-x-0 
-        z-50
-        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+        h-screen
+        z-40
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}>
         <div className="p-4 border-b border-emerald-700 flex items-center justify-between">
           {!isCollapsed && <span className="text-xl font-bold">{t('topbar.appName')}</span>}
@@ -62,7 +62,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileMenuOpen, setMobileMenuO
           </div>
         </div>
         
-        <nav className="flex-1 overflow-y-auto mt-6 px-2">
+        <nav className="flex-1 overflow-y-auto mt-6 px-2 scrollbar-thin scrollbar-thumb-emerald-700 scrollbar-track-transparent">
           {menuItems.map((item) => (
             <div key={item.path} className="mb-2">
               <NavLink

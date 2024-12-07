@@ -14,11 +14,11 @@ const Topbar = ({ isCollapsed, setMobileMenuOpen }) => {
 
   return (
     <div className={`
-      fixed top-0 right-0 left-0 
-      ${isCollapsed ? 'md:left-20' : 'md:left-72'}
+      fixed top-0 right-0 left-0
       bg-white shadow-md p-4 
       z-30
       transition-all duration-300
+      ${isCollapsed ? 'md:left-20' : 'md:left-72'}
     `}>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">

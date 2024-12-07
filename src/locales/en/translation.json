@@ -246,7 +246,26 @@
       "startDate": "Start Date",
       "endDate": "End Date",
       "monthlyPayment": "Monthly Payment",
-      "remainingAmount": "Remaining Amount"
+      "remainingAmount": "Remaining Amount",
+      "tenureMonths": "Tenure (Months)"
+    },
+    "preview": {
+      "title": "Loan Preview",
+      "amount": "Loan Amount",
+      "monthlyPayment": "Monthly Payment",
+      "duration": "Duration",
+      "months": "months",
+      "features": "Special Features"
+    },
+    "success": {
+      "loanAdded": "Loan added successfully"
+    },
+    "activeLoansList": "Active Loans List",
+    "summary": {
+      "title": "Loan Summary",
+      "totalBorrowed": "Total Borrowed",
+      "remaining": "Total Remaining",
+      "monthlyPayment": "Total Monthly Payment"
     },
     "guide": {
       "howToRead": "How to Read Loan Details",

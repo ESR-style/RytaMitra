@@ -7,20 +7,20 @@ const Cow = () => {
   const { t } = useTranslation();
 
   const milkData = {
-    totalCows: 25,
-    dailyProduction: 250,
-    monthlyRevenue: 75000,
+    totalCows: 5,
+    dailyProduction: 50,
+    monthlyRevenue: 15000,
     averagePerCow: 10
   }
 
   const chartData = [
-    { name: 'Mon', production: 240 },
-    { name: 'Tue', production: 250 },
-    { name: 'Wed', production: 245 },
-    { name: 'Thu', production: 260 },
-    { name: 'Fri', production: 255 },
-    { name: 'Sat', production: 240 },
-    { name: 'Sun', production: 230 },
+    { name: 'Mon', production: 48 },
+    { name: 'Tue', production: 50 },
+    { name: 'Wed', production: 45 },
+    { name: 'Thu', production: 52 },
+    { name: 'Fri', production: 49 },
+    { name: 'Sat', production: 47 },
+    { name: 'Sun', production: 46 },
   ]
 
   return (

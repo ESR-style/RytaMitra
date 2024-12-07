@@ -8,20 +8,20 @@ const Chicken = () => {
   const { t } = useTranslation();
 
   const poultryData = {
-    totalBirds: 500,
-    dailyEggs: 400,
-    monthlyRevenue: 45000,
+    totalBirds: 50,
+    dailyEggs: 40,
+    monthlyRevenue: 4500,
     averagePerBird: 0.8
   }
 
   const chartData = [
-    { name: 'Mon', eggs: 390 },
-    { name: 'Tue', eggs: 400 },
-    { name: 'Wed', eggs: 410 },
-    { name: 'Thu', eggs: 395 },
-    { name: 'Fri', eggs: 405 },
-    { name: 'Sat', eggs: 385 },
-    { name: 'Sun', eggs: 380 },
+    { name: 'Mon', eggs: 39 },
+    { name: 'Tue', eggs: 40 },
+    { name: 'Wed', eggs: 41 },
+    { name: 'Thu', eggs: 38 },
+    { name: 'Fri', eggs: 40 },
+    { name: 'Sat', eggs: 37 },
+    { name: 'Sun', eggs: 38 },
   ]
 
   return (

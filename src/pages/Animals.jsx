@@ -25,11 +25,11 @@ const Animals = () => {
           <div className="mt-4 grid grid-cols-2 gap-4">
             <div className="bg-blue-50 p-3 rounded-lg">
               <p className="text-sm text-gray-600">{t('animals.dairy.dailyStats')}</p>
-              <p className="text-xl font-bold text-blue-600">250L</p>
+              <p className="text-xl font-bold text-blue-600">50L</p>
             </div>
             <div className="bg-blue-50 p-3 rounded-lg">
               <p className="text-sm text-gray-600">{t('animals.dairy.cowCount')}</p>
-              <p className="text-xl font-bold text-blue-600">25</p>
+              <p className="text-xl font-bold text-blue-600">5</p>
             </div>
           </div>
         </div>
@@ -48,11 +48,11 @@ const Animals = () => {
           <div className="mt-4 grid grid-cols-2 gap-4">
             <div className="bg-orange-50 p-3 rounded-lg">
               <p className="text-sm text-gray-600">{t('animals.poultry.dailyStats')}</p>
-              <p className="text-xl font-bold text-orange-600">400</p>
+              <p className="text-xl font-bold text-orange-600">40</p>
             </div>
             <div className="bg-orange-50 p-3 rounded-lg">
               <p className="text-sm text-gray-600">{t('animals.poultry.birdCount')}</p>
-              <p className="text-xl font-bold text-orange-600">500</p>
+              <p className="text-xl font-bold text-orange-600">50</p>
             </div>
           </div>
         </div>

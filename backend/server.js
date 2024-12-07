@@ -17,6 +17,10 @@ const pool = new Pool({
 // Database initialization
 const initDb = async () => {
   try { 
+    // First drop the existing table
+    await pool.query('DROP TABLE IF EXISTS crop_transactions;');
+    
+    // Then recreate with consistent naming
     await pool.query(`
       CREATE TABLE IF NOT EXISTS transactions (
         id SERIAL PRIMARY KEY,
@@ -41,6 +45,15 @@ const initDb = async () => {
         planting_date DATE,
         expected_harvest DATE,
         status VARCHAR(50)
+      );
+
+      CREATE TABLE IF NOT EXISTS crop_transactions (
+        id SERIAL PRIMARY KEY,
+        item_name VARCHAR(100) NOT NULL,
+        quantity DECIMAL(10,2) NOT NULL,
+        price DECIMAL(10,2) NOT NULL,
+        buyer_name VARCHAR(100) NOT NULL,
+        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `)
     console.log('Database tables initialized')
@@ -108,6 +121,58 @@ app.get('/api/livestock/:type', async (req, res) => {
     res.status(500).json({ error: err.message })
   }
 })
+
+// Add new endpoints for crop transactions
+app.post('/api/crop-transactions', async (req, res) => {
+  try {
+    const { item_name, quantity, price, buyer_name } = req.body;
+    
+    // Log incoming request data
+    console.log('Received crop transaction:', req.body);
+    
+    // Validate inputs
+    if (!item_name || !quantity || !price || !buyer_name) {
+      console.error('Missing required fields:', { item_name, quantity, price, buyer_name });
+      return res.status(400).json({ 
+        error: 'Missing required fields',
+        details: { item_name, quantity, price, buyer_name }
+      });
+    }
+
+    // Execute database query with underscore naming
+    const result = await pool.query(
+      `INSERT INTO crop_transactions 
+       (item_name, quantity, price, buyer_name) 
+       VALUES ($1, $2::numeric, $3::numeric, $4) 
+       RETURNING *`,
+      [item_name.trim(), Number(quantity), Number(price), buyer_name.trim()]
+    );
+    
+    console.log('Database response:', result.rows[0]);
+    res.json(result.rows[0]);
+
+  } catch (err) {
+    console.error('Detailed error in /api/crop-transactions:', {
+      message: err.message,
+      stack: err.stack,
+      code: err.code
+    });
+    
+    res.status(500).json({ 
+      error: 'Server error processing transaction',
+      details: err.message
+    });
+  }
+});
+
+app.get('/api/crop-transactions', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM crop_transactions ORDER BY date DESC');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

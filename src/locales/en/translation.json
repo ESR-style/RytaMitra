@@ -170,7 +170,9 @@
     "description": "Description",
     "amount": "Amount",
     "add": "Add Transaction",
-    "addNew": "Add New Transaction"
+    "addNew": "Add New Transaction",
+    "regular": "Regular Transactions",
+    "crop": "Crop Transactions"
   },
   "schemes": {
     "pmKisan": "PM Kisan",

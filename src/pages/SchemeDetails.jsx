@@ -90,7 +90,7 @@ const SchemeDetails = () => {
                     <img 
                       src={step.image} 
                       alt={`Step ${index + 1}`} 
-                      className="rounded-lg w-full max-w-md"
+                      className="rounded-lg w-[100vw] -mx-6 md:w-full md:max-w-md md:mx-0" // changed this line
                     />
                   )}
                 </div>

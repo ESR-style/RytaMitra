@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
@@ -6,14 +6,17 @@ import useVoiceCommands from './hooks/useVoiceCommands';
 
 const App = () => {
   const { isListening, toggleListening } = useVoiceCommands();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1">
-          <Topbar />
-          <main className="p-4">
+      <div className="flex h-screen overflow-hidden">
+        <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Topbar isCollapsed={isCollapsed} />
+          <main className={`flex-1 overflow-y-auto p-4 transition-all duration-300 ${
+            isCollapsed ? 'ml-20' : 'ml-72'
+          }`}>
             <Outlet />
           </main>
           <button

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
   const { t } = useTranslation();
 
   const menuItems = [
@@ -24,7 +23,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className={`bg-emerald-800 text-white min-h-screen ${isCollapsed ? 'w-20' : 'w-72'} transition-all duration-300 shadow-lg`}>
+    <div className={`fixed left-0 top-0 bg-emerald-800 text-white h-screen ${isCollapsed ? 'w-20' : 'w-72'} transition-all duration-300 shadow-lg z-10`}>
       <div className="p-4 border-b border-emerald-700 flex items-center justify-between">
         {!isCollapsed && <span className="text-xl font-bold">{t('topbar.appName')}</span>}
         <button

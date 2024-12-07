@@ -9,11 +9,12 @@ const languages = [
   { code: 'hi', label: 'हिंदी' }
 ];
 
-const Topbar = () => {
+const Topbar = ({ isCollapsed }) => {
   const { t, i18n } = useTranslation();
 
   return (
-    <div className="bg-white shadow-md p-4">
+    <div className={`fixed top-0 right-0 bg-white shadow-md p-4 z-10 transition-all duration-300`} 
+         style={{ left: isCollapsed ? '5rem' : '18rem' }}>
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <h1 className="text-2xl font-bold text-emerald-800">{t('topbar.appName')}</h1>
         <div className="flex items-center space-x-4">

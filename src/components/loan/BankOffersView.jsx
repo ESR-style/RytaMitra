@@ -5,8 +5,8 @@ import { bankLoanOffers, loanGuide } from '../../data/bankData';
 
 const BankOffersView = () => {
   const { t, i18n } = useTranslation();
-  const [selectedRisk, setSelectedRisk] = useState('all');
   const currentLanguage = i18n.language === 'kn' ? 'kn' : 'en';
+  const [selectedRisk, setSelectedRisk] = useState('all');
 
   const getRiskColor = (risk) => {
     switch(risk) {
@@ -32,99 +32,98 @@ const BankOffersView = () => {
 
   return (
     <div className="space-y-6">
-      {/* Loan Guide Section */}
-      <Paper className="p-4 bg-blue-50">
-        <Typography variant="h6" className="mb-3 text-blue-800">
-          💡 {t('loans.guide.howToRead')}
-        </Typography>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="space-y-2">
-            <h3 className="font-medium">{t('loans.guide.interestExplanation')}</h3>
-            {loanGuide.interest_explanation[currentLanguage].map((item, idx) => (
-              <div key={idx} className="text-sm text-blue-700">{item}</div>
-            ))}
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-medium">{t('loans.guide.documents')}</h3>
-            {loanGuide.documents_needed[currentLanguage].map((item, idx) => (
-              <div key={idx} className="text-sm text-blue-700">{item}</div>
-            ))}
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-medium">{t('loans.guide.bestPractices')}</h3>
-            {loanGuide.best_practices[currentLanguage].map((item, idx) => (
-              <div key={idx} className="text-sm text-blue-700">{item}</div>
-            ))}
-          </div>
-        </div>
-      </Paper>
-
-      {/* Risk Level Filters */}
-      <div className="flex gap-2">
-        <Button 
-          variant={selectedRisk === 'all' ? 'contained' : 'outlined'}
+      {/* Visual Risk Filter */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Paper 
+          className={`p-4 cursor-pointer ${selectedRisk === 'all' ? 'ring-2 ring-blue-500' : ''}`}
           onClick={() => setSelectedRisk('all')}
         >
-          👀 {t('loans.filter.all')}
-        </Button>
+          <div className="text-center">
+            <span className="text-3xl">🏦</span>
+            <Typography className="mt-2">{t('loans.filter.all')}</Typography>
+          </div>
+        </Paper>
         {['low', 'medium', 'high'].map(risk => (
-          <Button
+          <Paper 
             key={risk}
-            variant={selectedRisk === risk ? 'contained' : 'outlined'}
+            className={`p-4 cursor-pointer ${getRiskColor(risk)} ${
+              selectedRisk === risk ? 'ring-2 ring-blue-500' : ''
+            }`}
             onClick={() => setSelectedRisk(risk)}
-            className={getRiskColor(risk)}
           >
-            {risk === 'low' ? '✅' : risk === 'medium' ? '⚠️' : '⚡'} {t(`loans.risk.${risk}`)}
-          </Button>
+            <div className="text-center">
+              <span className="text-3xl">
+                {risk === 'low' ? '✅' : risk === 'medium' ? '⚠️' : '⚡'}
+              </span>
+              <Typography className="mt-2">{t(`loans.risk.${risk}`)}</Typography>
+            </div>
+          </Paper>
         ))}
       </div>
 
-      {/* Bank Offers Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Simplified Bank Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredOffers.map((bank) => (
-          <Paper key={bank.bank_name} className={`p-4 border-l-4 ${getRiskColor(bank.risk_level)}`}>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-2xl">{bank.bank_logo}</span>
-              <Typography variant="h6">{bank.bank_name}</Typography>
+          <Paper 
+            key={bank.bank_name} 
+            className={`overflow-hidden ${getRiskColor(bank.risk_level)}`}
+          >
+            {/* Bank Header */}
+            <div className="p-4 bg-white border-b">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{bank.bank_logo}</span>
+                <div>
+                  <Typography variant="h6">{bank.bank_name}</Typography>
+                  <Typography variant="subtitle2" className="text-gray-600">
+                    {bank.loan_type[currentLanguage]}
+                  </Typography>
+                </div>
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                {bank.loan_icon} {bank.loan_type[currentLanguage]}
-              </div>
-
-              <Tooltip title={t('loans.tooltip.interestRate')} arrow>
-                <div className="text-lg font-semibold">
+            {/* Main Content */}
+            <div className="p-4 space-y-4">
+              {/* Interest Rate */}
+              <div className="bg-white p-3 rounded-lg shadow-sm">
+                <div className="text-lg font-bold text-green-700">
                   💰 {bank.interest_rate_min}% - {bank.interest_rate_max}%
                 </div>
-              </Tooltip>
-
-              <div className="text-sm bg-gray-50 p-2 rounded">
-                💵 {bank.payment_example[currentLanguage]}
+                <div className="text-sm text-gray-600">
+                  {bank.payment_example[currentLanguage]}
+                </div>
               </div>
 
-              <div className="space-y-1">
+              {/* Key Features */}
+              <div className="space-y-2">
                 {bank.special_features[currentLanguage].map((feature, idx) => (
-                  <div key={idx} className="text-sm">{feature}</div>
+                  <div key={idx} className="flex items-center gap-2 bg-white p-2 rounded">
+                    {feature}
+                  </div>
                 ))}
               </div>
 
-              <div className="border-t pt-2 mt-2">
+              {/* Quick Requirements */}
+              <div className="bg-gray-50 p-3 rounded-lg">
+                <Typography variant="subtitle2" className="mb-2">
+                  {t('loans.requirements.title')}:
+                </Typography>
                 {bank.simple_eligibility[currentLanguage].map((criteria, idx) => (
-                  <div key={idx} className="text-sm text-gray-600">{criteria}</div>
+                  <div key={idx} className="text-sm">{criteria}</div>
                 ))}
               </div>
 
-              <div className="flex items-center gap-2 mt-2">
-                {bank.local_language_support.map(lang => (
-                  <Tooltip key={lang} title={t(`loans.language.${lang}`)} arrow>
-                    <span className="text-xl">{getLanguageIcon(lang)}</span>
-                  </Tooltip>
-                ))}
-              </div>
-
-              <div className="text-sm text-blue-600 mt-2">
-                📞 {bank.helpline}
+              {/* Contact Info */}
+              <div className="flex items-center justify-between pt-2 border-t">
+                <div className="flex gap-2">
+                  {bank.local_language_support.map(lang => (
+                    <Tooltip key={lang} title={t(`loans.language.${lang}`)} arrow>
+                      <span className="text-xl">{getLanguageIcon(lang)}</span>
+                    </Tooltip>
+                  ))}
+                </div>
+                <Typography className="text-blue-600">
+                  📞 {bank.helpline}
+                </Typography>
               </div>
             </div>
           </Paper>

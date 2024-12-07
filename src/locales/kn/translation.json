@@ -197,6 +197,47 @@
       "monthlyPayment": "ತಿಂಗಳ ಪಾವತಿ",
       "documents": "ಅಗತ್ಯ ದಾಖಲೆಗಳು",
       "helpline": "ಸಹಾಯವಾಣಿ"
+    },
+    "bank": {
+      "public": "ಸರ್ಕಾರಿ ಬ್ಯಾಂಕ್",
+      "private": "ಖಾಸಗಿ ಬ್ಯಾಂಕ್"
+    },
+    "tips": {
+      "title": "ಠೇವಣಿಗಳಿಗೆ ಸಲಹೆಗಳು",
+      "compare": "ಉತ್ತಮ ಬಡ್ಡಿಗಾಗಿ ವಿವಿಧ ಬ್ಯಾಂಕುಗಳ ದರಗಳನ್ನು ಹೋಲಿಸಿ",
+      "senior": "ಹಿರಿಯ ನಾಗರಿಕರಿಗೆ (60 ವರ್ಷ ಮೇಲ್ಪಟ್ಟವರು) ಹೆಚ್ಚಿನ ದರಗಳು",
+      "duration": "ಹೆಚ್ಚಿನ ಅವಧಿ ಸಾಮಾನ್ಯವಾಗಿ ಉತ್ತಮ ಬಡ್ಡಿ ದರವನ್ನು ನೀಡುತ್ತದೆ"
+    },
+    "interest": {
+      "rate": "ಬಡ್ಡಿ ದರ (%)",
+      "normal": "ಸಾಮಾನ್ಯ ದರ",
+      "senior": "ಹಿರಿಯ ನಾಗರಿಕರ ದರ"
+    },
+    "deposit": {
+      "minimum": "ಕನಿಷ್ಠ ಠೇವಣಿ ಮೊತ್ತ"
+    },
+    "duration": {
+      "months": "ತಿಂಗಳುಗಳು",
+      "year": "ವರ್ಷ",
+      "years": "ವರ್ಷಗಳು"
+    },
+    "calculator": {
+      "fdTitle": "ಠೇವಣಿ ಕ್ಯಾಲ್ಕುಲೇಟರ್",
+      "depositAmount": "ಠೇವಣಿ ಮೊತ್ತ",
+      "amountPlaceholder": "ಮೊತ್ತ ನಮೂದಿಸಿ",
+      "interestRate": "ಬಡ್ಡಿ ದರ (%)",
+      "ratePlaceholder": "ಬಡ್ಡಿ ದರ ನಮೂದಿಸಿ",
+      "depositYears": "ಅವಧಿ (ವರ್ಷಗಳು)",
+      "yearsPlaceholder": "ವರ್ಷಗಳನ್ನು ನಮೂದಿಸಿ",
+      "calculate": "ಲೆಕ್ಕ ಹಾಕಿ",
+      "result": {
+        "title": "ಮ್ಯಾಚ್ಯುರಿಟಿ ವಿವರಗಳು",
+        "depositAmount": "ಮೂಲ ಮೊತ್ತ",
+        "interestEarned": "ಗಳಿಸಿದ ಬಡ್ಡಿ",
+        "totalAmount": "ಒಟ್ಟು ಮೊತ್ತ",
+        "interestRate": "ಬಡ್ಡಿ ದರ",
+        "timePeriod": "ಅವಧಿ"
+      }
     }
   }
 }

@@ -247,6 +247,47 @@
       "monthlyPayment": "Monthly Payment",
       "documents": "Required Documents",
       "helpline": "Helpline Number"
+    },
+    "bank": {
+      "public": "Government Bank",
+      "private": "Private Bank"
+    },
+    "tips": {
+      "title": "Tips for Fixed Deposits",
+      "compare": "Compare rates between different banks for best returns",
+      "senior": "Senior citizens (above 60) get higher rates",
+      "duration": "Longer duration usually gives better interest rates"
+    },
+    "interest": {
+      "rate": "Interest Rate (%)",
+      "normal": "Regular Rate",
+      "senior": "Senior Citizen Rate"
+    },
+    "deposit": {
+      "minimum": "Minimum Deposit Amount"
+    },
+    "duration": {
+      "months": "Months",
+      "year": "Year",
+      "years": "Years"
+    },
+    "calculator": {
+      "fdTitle": "Fixed Deposit Calculator",
+      "depositAmount": "Deposit Amount",
+      "amountPlaceholder": "Enter amount",
+      "interestRate": "Interest Rate (%)",
+      "ratePlaceholder": "Enter interest rate",
+      "depositYears": "Time Period (Years)",
+      "yearsPlaceholder": "Enter years",
+      "calculate": "Calculate Returns",
+      "result": {
+        "title": "Maturity Details",
+        "depositAmount": "Principal Amount",
+        "interestEarned": "Interest Earned",
+        "totalAmount": "Maturity Amount",
+        "interestRate": "Interest Rate",
+        "timePeriod": "Time Period"
+      }
     }
   }
 }

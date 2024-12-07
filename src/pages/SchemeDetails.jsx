@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { gangaKalyana } from '../data/schemeDetails/gangaKalyana';
+import { pmfby } from '../data/schemeDetails/pmfby';
+import { kisanCredit } from '../data/schemeDetails/kisanCredit';
 
 const SchemeDetails = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('kannada');
@@ -9,7 +11,8 @@ const SchemeDetails = () => {
 
   const schemeDetails = {
     'ganga-kalyana': gangaKalyana,
-    // Add other schemes as needed
+    'pmfby': pmfby,
+    'kisan-credit': kisanCredit
   };
 
   const currentScheme = schemeDetails[id];
@@ -98,7 +101,12 @@ const SchemeDetails = () => {
           {/* Apply Button */}
           <div className="mt-8 text-center">
             <button 
-              onClick={() => {/* Add navigation logic */}}
+              onClick={() => {
+                if (id === 'ganga-kalyana') {
+                  window.open('https://kmdc.karnataka.gov.in', '_blank');
+                }
+                // Add other scheme links as needed
+              }}
               className="bg-green-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-600"
             >
               {selectedLanguage === 'kannada' ? 'ಅರ್ಜಿ ಸಲ್ಲಿಸಿ' : 'Apply Now'}

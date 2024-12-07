@@ -12,15 +12,27 @@ export const schemes = [
     icon: "💧"
   },
   {
-    id: 'krishi-bhagya',
+    id: 'pmfby',
     title: {
-      kannada: "ಕೃಷಿ ಭಾಗ್ಯ ಯೋಜನೆ",
-      english: "Krishi Bhagya Yojana"
+      kannada: "ಪ್ರಧಾನ ಮಂತ್ರಿ ಫಸಲ್ ಭೀಮಾ ಯೋಜನೆ",
+      english: "Pradhan Mantri Fasal Bima Yojana"
     },
     shortDescription: {
-      kannada: "ಮಳೆ ನೀರು ಕೊಯ್ಲು ಘಟಕಗಳು",
-      english: "Rainwater harvesting units"
+      kannada: "ಬೆಳೆ ವಿಮೆ ಯೋಜನೆ",
+      english: "Crop Insurance Scheme"
     },
-    icon: "🌧️"
+    icon: "🌾"
+  },
+  {
+    id: 'kisan-credit',
+    title: {
+      kannada: "ಕಿಸಾನ್ ಕ್ರೆಡಿಟ್ ಕಾರ್ಡ್",
+      english: "Kisan Credit Card"
+    },
+    shortDescription: {
+      kannada: "ರೈತರಿಗೆ ಸುಲಭ ಸಾಲ ಸೌಲಭ್ಯ",
+      english: "Easy credit facility for farmers"
+    },
+    icon: "💳"
   }
 ];

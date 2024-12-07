@@ -30,26 +30,34 @@ const voiceCommandsList = {
 };
 
 const Dashboard = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const formatDate = (date) => {
+    if (i18n.language === 'kn') {
+      return new Date().toLocaleDateString('kn-IN', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      });
+    }
+    return date.toLocaleDateString();
+  };
 
   const recentTransactions = [
-    { id: 1, type: 'credit', amount: '₹12,000', description: 'Milk sale', date: '2024-03-15' },
-    { id: 2, type: 'debit', amount: '₹5,000', description: 'Feed purchase', date: '2024-03-14' },
-    { id: 3, type: 'credit', amount: '₹8,000', description: 'Crop sale', date: '2024-03-13' },
+    { id: 1, type: 'credit', amount: '₹12,000', description: t('transactions.milkSale'), date: '2024-03-15' },
+    { id: 2, type: 'debit', amount: '₹5,000', description: t('transactions.feedPurchase'), date: '2024-03-14' },
+    { id: 3, type: 'credit', amount: '₹8,000', description: t('transactions.cropSale'), date: '2024-03-13' },
   ];
 
   const activeSchemes = [
-    { id: 1, name: 'PM Kisan', amount: '₹6,000', status: 'Active', dueDate: '2024-04-01' },
-    { id: 2, name: 'Crop Insurance', amount: '₹10,000', status: 'Pending', dueDate: '2024-03-25' },
+    { id: 1, name: t('schemes.pmKisan'), amount: '₹6,000', status: t('status.active'), dueDate: '2024-04-01' },
+    { id: 2, name: t('schemes.cropInsurance'), amount: '₹10,000', status: t('status.pending'), dueDate: '2024-03-25' },
   ];
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-emerald-800">{t('dashboard.welcome')}</h1>
-          <p className="text-gray-600 mt-1">{new Date().toLocaleDateString()}</p>
-        </div>
+        <p className="text-gray-600">{t('dashboard.today')}: {formatDate(new Date())}</p>
         <div className="flex space-x-4">
           <button className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200">
             🔔 {t('dashboard.notifications')}
@@ -59,21 +67,14 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <DashboardCard 
           title={t('dashboard.totalBalance')}
           value="₹45,000"
           icon="💰"
           trend="up"
           trendValue="+₹5,000"
-        />
-        <DashboardCard 
-          title={t('dashboard.cropHealth')}
-          value={t('dashboard.healthy')}
-          icon="🌾"
-          trend="up"
-          trendValue="98%"
         />
         <DashboardCard 
           title={t('dashboard.livestockCount')}
@@ -145,19 +146,29 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Improved Voice Commands Section */}
       <div className="mt-6">
         <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-100">
-          <h3 className="text-lg font-medium text-blue-800 mb-4">{t('dashboard.voiceCommands')}</h3>
+          <h3 className="text-lg font-medium text-blue-800 mb-4">
+            <span className="mr-2">🎤</span>
+            {t('dashboard.voiceCommands')}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(voiceCommandsList).map(([command, description]) => (
-              <div key={command} className="flex items-center space-x-2 bg-white p-2 rounded-lg shadow-sm">
+              <div key={command} 
+                   className="flex items-center space-x-2 bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              >
                 <span className="text-blue-500">🎤</span>
-                <span className="text-gray-700">"{command}" - {t(description)}</span>
+                <div>
+                  <p className="font-medium">{command}</p>
+                  <p className="text-sm text-gray-600">{t(description)}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
     </div>
   );
 };

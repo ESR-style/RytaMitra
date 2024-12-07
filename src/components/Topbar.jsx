@@ -15,7 +15,7 @@ const Topbar = () => {
   return (
     <div className="bg-white shadow-md p-4">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold text-emerald-800">RytaMitra</h1>
+        <h1 className="text-2xl font-bold text-emerald-800">{t('topbar.appName')}</h1>
         <div className="flex items-center space-x-4">
           <select
             onChange={(e) => i18n.changeLanguage(e.target.value)}

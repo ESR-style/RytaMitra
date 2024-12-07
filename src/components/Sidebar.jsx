@@ -10,7 +10,8 @@ const Sidebar = () => {
     { path: '/', label: t('sidebar.dashboard'), icon: '🏠' },
     { path: '/charts', label: t('sidebar.charts'), icon: '📈' },
     { path: '/transaction', label: t('sidebar.transactions'), icon: '💸' },
-    { path: '/loan', label: t('sidebar.loans'), icon: '🏦' },
+    { path: '/loan', label: t('sidebar.loans'), icon: '🏦' }, // Changed from /loans to /loan
+    { path: '/scheme', label: t('sidebar.schemes'), icon: '📋' }, // Changed from /schemes to /scheme
     {
       path: '/animals',
       label: t('sidebar.animals'),
@@ -25,7 +26,7 @@ const Sidebar = () => {
   return (
     <div className={`bg-emerald-800 text-white min-h-screen ${isCollapsed ? 'w-20' : 'w-72'} transition-all duration-300 shadow-lg`}>
       <div className="p-4 border-b border-emerald-700 flex items-center justify-between">
-        {!isCollapsed && <span className="text-xl font-bold">RytaMitra</span>}
+        {!isCollapsed && <span className="text-xl font-bold">{t('topbar.appName')}</span>}
         <button
           className="p-2 rounded-lg hover:bg-emerald-700 text-emerald-200"
           onClick={() => setIsCollapsed(!isCollapsed)}

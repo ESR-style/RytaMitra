@@ -7,19 +7,28 @@
     "pendingPayments": "ಬಾಕಿ ಪಾವತಿಗಳು",
     "recentTransactions": "ಇತ್ತೀಚಿನ ವಹಿವಾಟುಗಳು",
     "activeSchemes": "ಸಕ್ರಿಯ ಯೋಜನೆಗಳು",
-    "voiceCommands": "ಧ್ವನಿ ಆಜ್ಞೆಗಳು"
+    "voiceCommands": "ಧ್ವನಿ ಆಜ್ಞೆಗಳು",
+    "today": "ಇಂದು",
+    "status": {
+      "active": "ಸಕ್ರಿಯ",
+      "pending": "ಬಾಕಿ ಇದೆ"
+    },
+    "notifications": "ಸೂಚನೆಗಳು",
+    "addTransaction": "ವಹಿವಾಟು ಸೇರಿಸಿ"
   },
   "sidebar": {
     "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
     "charts": "ನಕ್ಷೆಗಳು",
     "transactions": "ವಹಿವಾಟುಗಳು",
-    "loans": "ಸಾಲಗಳು & ಯೋಜನೆಗಳು",
+    "loans": "ಸಾಲಗಳು",
+    "schemes": "ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು",
     "animals": "ಪ್ರಾಣಿಗಳು",
     "cow": "ದನ",
     "chicken": "ಕೋಳಿ"
   },
   "topbar": {
-    "title": "ರೈತರ ಪೋರ್ಟಲ್"
+    "title": "ರೈತರ ಪೋರ್ಟಲ್",
+    "appName": "ರೈತಮಿತ್ರ"
   },
   "animals": {
     "title": "ಪ್ರಾಣಿ ನಿರ್ವಹಣೆ",
@@ -45,5 +54,47 @@
       "dailyStats": "ದೈನಂದಿನ ಮೊಟ್ಟೆಗಳು",
       "birdCount": "ಒಟ್ಟು ಪಕ್ಷಿಗಳು"
     }
+  },
+  "charts": {
+    "title": "ಕೃಷಿ ವಿಶ್ಲೇಷಣೆ",
+    "filters": {
+      "dateRange": "ದಿನಾಂಕ ವ್ಯಾಪ್ತಿ",
+      "category": "ವರ್ಗ",
+      "type": "ನಕ್ಷೆ ಪ್ರಕಾರ"
+    },
+    "categories": {
+      "income": "ಆದಾಯ ವಿಶ್ಲೇಷಣೆ",
+      "livestock": "ಜಾನುವಾರು ಅಂಕಿಅಂಶಗಳು",
+      "crops": "ಬೆಳೆ ಕಾರ್ಯಕ್ಷಮತೆ",
+      "expenses": "ವೆಚ್ಚ ವಿವರಣೆ"
+    },
+    "metrics": {
+      "dailyIncome": "ದೈನಂದಿನ ಆದಾಯ",
+      "monthlyRevenue": "ಮಾಸಿಕ ಆದಾಯ",
+      "productionTrends": "ಉತ್ಪಾದನಾ ಪ್ರವೃತ್ತಿಗಳು",
+      "profitMargins": "ಲಾಭ ಮಾರ್ಜಿನ್‌ಗಳು"
+    }
+  },
+  "transactions": {
+    "title": "ವಹಿವಾಟುಗಳು",
+    "milkSale": "ಹಾಲು ಮಾರಾಟ",
+    "feedPurchase": "ಮೇವು ಖರೀದಿ",
+    "cropSale": "ಬೆಳೆ ಮಾರಾಟ",
+    "type": {
+      "credit": "ಜಮಾ",
+      "debit": "ಖರ್ಚು"
+    },
+    "filter": "ವಹಿವಾಟುಗಳನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ",
+    "date": "ದಿನಾಂಕ",
+    "description": "ವಿವರಣೆ",
+    "amount": "ಮೊತ್ತ"
+  },
+  "schemes": {
+    "pmKisan": "ಪಿಎಂ ಕಿಸಾನ್",
+    "cropInsurance": "ಬೆಳೆ ವಿಮೆ"
+  },
+  "status": {
+    "active": "ಸಕ್ರಿಯ",
+    "pending": "ಬಾಕಿ ಇದೆ"
   }
 }

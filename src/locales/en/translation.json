@@ -8,21 +8,24 @@
     "recentTransactions": "Recent Transactions",
     "activeSchemes": "Active Schemes",
     "voiceCommands": "Voice Commands Available",
-    "welcome": "Welcome to Your Farm Dashboard",
-    "healthy": "Healthy",
-    "cropHealth": "Crop Health",
     "weatherForecast": "Weather Forecast",
     "notifications": "Notifications",
     "addTransaction": "Add Transaction",
     "viewAll": "View All",
     "dueDate": "Due Date",
-    "todayOverview": "Today's Overview"
+    "todayOverview": "Today's Overview",
+    "today": "Today",
+    "status": {
+      "active": "Active",
+      "pending": "Pending"
+    }
   },
   "sidebar": {
     "dashboard": "Dashboard",
     "charts": "Charts",
     "transactions": "Transactions",
-    "loans": "Loans & Schemes",
+    "loans": "Loans",
+    "schemes": "Government Schemes",
     "animals": "Animals",
     "cow": "Cow",
     "chicken": "Chicken"
@@ -33,7 +36,8 @@
     "location": "Bangalore Region",
     "weather": {
       "forecast": "Sunny with light rain expected"
-    }
+    },
+    "appName": "RytaMitra"
   },
   "commands": {
     "goToDashboard": "Go to Dashboard",
@@ -68,5 +72,47 @@
       "dailyStats": "Daily Eggs",
       "birdCount": "Total Birds"
     }
+  },
+  "charts": {
+    "title": "Farm Analytics",
+    "filters": {
+      "dateRange": "Date Range",
+      "category": "Category",
+      "type": "Chart Type"
+    },
+    "categories": {
+      "income": "Income Analysis",
+      "livestock": "Livestock Stats",
+      "crops": "Crop Performance",
+      "expenses": "Expense Breakdown"
+    },
+    "metrics": {
+      "dailyIncome": "Daily Income",
+      "monthlyRevenue": "Monthly Revenue",
+      "productionTrends": "Production Trends",
+      "profitMargins": "Profit Margins"
+    }
+  },
+  "transactions": {
+    "title": "Transactions",
+    "milkSale": "Milk sale",
+    "feedPurchase": "Feed purchase",
+    "cropSale": "Crop sale",
+    "type": {
+      "credit": "Credit",
+      "debit": "Debit"
+    },
+    "filter": "Filter transactions",
+    "date": "Date",
+    "description": "Description",
+    "amount": "Amount"
+  },
+  "schemes": {
+    "pmKisan": "PM Kisan",
+    "cropInsurance": "Crop Insurance"
+  },
+  "status": {
+    "active": "Active",
+    "pending": "Pending"
   }
 }

@@ -6,8 +6,11 @@ const Ramanna = () => {
   const [messages, setMessages] = useState([]);
   const [isListening, setIsListening] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [availableVoice, setAvailableVoice] = useState(null);
   const chatContainerRef = useRef(null);
   const recognition = useRef(null);
+  const speechQueue = useRef([]);
+  const isSpeaking = useRef(false);
 
   const genAI = new GoogleGenerativeAI('AIzaSyC2hmL7eWNB_TW5qCpFHNrtmJ0LVAaHzIs');
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -29,10 +32,36 @@ const Ramanna = () => {
       setIsListening(false);
     };
 
+    // Initialize speech synthesis
+    const initVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      const kannadaVoice = voices.find(voice => 
+        voice.lang.includes('kn') || voice.lang.includes('kan')
+      ) || voices.find(voice => 
+        voice.lang.includes('hi-IN')  // Fallback to Hindi if Kannada not available
+      );
+      setAvailableVoice(kannadaVoice);
+    };
+
+    window.speechSynthesis.onvoiceschanged = initVoices;
+    initVoices();
+
+    // Force load voices
+    window.speechSynthesis.getVoices();
+
+    // Add voice changed event listener
+    const handleVoicesChanged = () => {
+      window.speechSynthesis.getVoices();
+    };
+
+    window.speechSynthesis.onvoiceschanged = handleVoicesChanged;
+
     return () => {
       if (recognition.current) {
         recognition.current.stop();
       }
+      window.speechSynthesis.cancel();
+      speechQueue.current = [];
     };
   }, []);
 
@@ -69,16 +98,65 @@ const Ramanna = () => {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
         type: 'ai', 
-        text: 'ತಾಂತ್ರಿಕ ತೊಂದರೆ ಎದುರಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.' 
+        text: 'ತಾಂತ್ರಿಕ ತೊಂದರೆ ಎದುರಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯ���್ನಿಸಿ.' 
       }]);
     }
     setLoading(false);
   };
 
-  const speakResponse = (text) => {
+  const processSpeechQueue = () => {
+    if (speechQueue.current.length === 0 || isSpeaking.current) return;
+    
+    isSpeaking.current = true;
+    const text = speechQueue.current[0];
+    
     const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Try to find the best voice for Kannada
+    const voices = window.speechSynthesis.getVoices();
+    const kannadaVoice = voices.find(voice => voice.lang === 'kn-IN') ||
+                        voices.find(voice => voice.lang.includes('kn')) ||
+                        voices.find(voice => voice.lang === 'hi-IN') ||
+                        voices.find(voice => voice.lang.includes('hi'));
+    
+    if (kannadaVoice) {
+      utterance.voice = kannadaVoice;
+    }
+
     utterance.lang = 'kn-IN';
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    utterance.onend = () => {
+      speechQueue.current.shift();
+      isSpeaking.current = false;
+      processSpeechQueue();
+    };
+
+    utterance.onerror = (event) => {
+      console.error('Speech synthesis error:', event);
+      isSpeaking.current = false;
+      speechQueue.current.shift();
+      processSpeechQueue();
+    };
+
     window.speechSynthesis.speak(utterance);
+  };
+
+  const speakResponse = (text) => {
+    // Split long text into sentences for better handling
+    const sentences = text.match(/[^।]+।/g) || [text];
+    
+    // Clear existing queue
+    speechQueue.current = [];
+    window.speechSynthesis.cancel();
+    
+    // Add sentences to queue
+    speechQueue.current.push(...sentences);
+    
+    // Start processing queue
+    processSpeechQueue();
   };
 
   return (

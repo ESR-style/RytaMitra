@@ -1,0 +1,47 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "totalBalance": "Total Balance",
+    "activeLoans": "Active Loans",
+    "livestockCount": "Livestock Count",
+    "pendingPayments": "Pending Payments",
+    "recentTransactions": "Recent Transactions",
+    "activeSchemes": "Active Schemes",
+    "voiceCommands": "Voice Commands Available",
+    "welcome": "Welcome to Your Farm Dashboard",
+    "healthy": "Healthy",
+    "cropHealth": "Crop Health",
+    "weatherForecast": "Weather Forecast",
+    "notifications": "Notifications",
+    "addTransaction": "Add Transaction",
+    "viewAll": "View All",
+    "dueDate": "Due Date",
+    "todayOverview": "Today's Overview"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "charts": "Charts",
+    "transactions": "Transactions",
+    "loans": "Loans & Schemes",
+    "animals": "Animals",
+    "cow": "Cow",
+    "chicken": "Chicken"
+  },
+  "topbar": {
+    "title": "RytaMitra - Farmer's Friend",
+    "welcome": "Welcome back",
+    "location": "Bangalore Region",
+    "weather": {
+      "forecast": "Sunny with light rain expected"
+    }
+  },
+  "commands": {
+    "goToDashboard": "Go to Dashboard",
+    "showTransactions": "View Transactions",
+    "showCharts": "View Charts",
+    "showCow": "View Cow Details",
+    "showChicken": "View Chicken Details",
+    "showSchemes": "View Schemes",
+    "showLoans": "View Loans"
+  }
+}

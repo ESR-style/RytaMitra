@@ -1,0 +1,25 @@
+
+{
+  "dashboard": {
+    "title": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "totalBalance": "ಒಟ್ಟು ಮೊತ್ತ",
+    "activeLoans": "ಸಕ್ರಿಯ ಸಾಲಗಳು",
+    "livestockCount": "ಜಾನುವಾರುಗಳ ಸಂಖ್ಯೆ",
+    "pendingPayments": "ಬಾಕಿ ಪಾವತಿಗಳು",
+    "recentTransactions": "ಇತ್ತೀಚಿನ ವಹಿವಾಟುಗಳು",
+    "activeSchemes": "ಸಕ್ರಿಯ ಯೋಜನೆಗಳು",
+    "voiceCommands": "ಧ್ವನಿ ಆಜ್ಞೆಗಳು"
+  },
+  "sidebar": {
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "charts": "ನಕ್ಷೆಗಳು",
+    "transactions": "ವಹಿವಾಟುಗಳು",
+    "loans": "ಸಾಲಗಳು & ಯೋಜನೆಗಳು",
+    "animals": "ಪ್ರಾಣಿಗಳು",
+    "cow": "ದನ",
+    "chicken": "ಕೋಳಿ"
+  },
+  "topbar": {
+    "title": "ರೈತರ ಪೋರ್ಟಲ್"
+  }
+}

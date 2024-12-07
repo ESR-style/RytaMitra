@@ -1,0 +1,25 @@
+
+{
+  "dashboard": {
+    "title": "డాష్‌బోర్డ్",
+    "totalBalance": "మొత్తం నిల్వ",
+    "activeLoans": "యాక్టివ్ రుణాలు",
+    "livestockCount": "పశువుల సంఖ్య",
+    "pendingPayments": "పెండింగ్ చెల్లిం��ులు",
+    "recentTransactions": "ఇటీవలి లావాదేవీలు",
+    "activeSchemes": "యాక్టివ్ పథకాలు",
+    "voiceCommands": "వాయిస్ ఆదేశాలు"
+  },
+  "sidebar": {
+    "dashboard": "డాష్‌బోర్డ్",
+    "charts": "చార్ట్‌లు",
+    "transactions": "లావాదేవీలు",
+    "loans": "రుణాలు & పథకాలు",
+    "animals": "జంతువులు",
+    "cow": "ఆవు",
+    "chicken": "కోడి"
+  },
+  "topbar": {
+    "title": "రైతు పోర్టల్"
+  }
+}

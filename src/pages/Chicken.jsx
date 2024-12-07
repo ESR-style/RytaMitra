@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { GiChicken, GiMoneyStack, GiChart } from 'react-icons/gi'
 import { FaEgg } from 'react-icons/fa'
@@ -6,13 +6,28 @@ import { useTranslation } from 'react-i18next'
 
 const Chicken = () => {
   const { t } = useTranslation();
+  const [poultryData, setPoultryData] = useState(null);
 
-  const poultryData = {
-    totalBirds: 50,
-    dailyEggs: 40,
-    monthlyRevenue: 4500,
-    averagePerBird: 0.8
-  }
+  useEffect(() => {
+    fetchPoultryData();
+  }, []);
+
+  const fetchPoultryData = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/livestock/chicken');
+      const data = await response.json();
+      if (data) {
+        setPoultryData({
+          totalBirds: data.count,
+          dailyEggs: data.daily_production,
+          monthlyRevenue: data.daily_production * 30 * 5, // assuming ₹5 per egg
+          averagePerBird: data.daily_production / data.count
+        });
+      }
+    } catch (err) {
+      console.error('Error fetching poultry data:', err);
+    }
+  };
 
   const chartData = [
     { name: 'Mon', eggs: 39 },
@@ -34,7 +49,7 @@ const Chicken = () => {
             <GiChicken className="text-4xl text-orange-600" />
             <div>
               <h3 className="text-gray-600">{t('animals.poultry.totalBirds')}</h3>
-              <p className="text-2xl font-bold text-gray-800">{poultryData.totalBirds}</p>
+              <p className="text-2xl font-bold text-gray-800">{poultryData?.totalBirds}</p>
             </div>
           </div>
         </div>
@@ -44,7 +59,7 @@ const Chicken = () => {
             <FaEgg className="text-4xl text-orange-600" />
             <div>
               <h3 className="text-gray-600">{t('animals.poultry.dailyEggs')}</h3>
-              <p className="text-2xl font-bold text-gray-800">{poultryData.dailyEggs}</p>
+              <p className="text-2xl font-bold text-gray-800">{poultryData?.dailyEggs}</p>
             </div>
           </div>
         </div>
@@ -54,7 +69,7 @@ const Chicken = () => {
             <GiMoneyStack className="text-4xl text-orange-600" />
             <div>
               <h3 className="text-gray-600">{t('animals.poultry.monthlyRevenue')}</h3>
-              <p className="text-2xl font-bold text-gray-800">{poultryData.monthlyRevenue}</p>
+              <p className="text-2xl font-bold text-gray-800">{poultryData?.monthlyRevenue}</p>
             </div>
           </div>
         </div>
@@ -64,7 +79,7 @@ const Chicken = () => {
             <GiChart className="text-4xl text-orange-600" />
             <div>
               <h3 className="text-gray-600">{t('animals.poultry.averagePerBird')}</h3>
-              <p className="text-2xl font-bold text-gray-800">{poultryData.averagePerBird}</p>
+              <p className="text-2xl font-bold text-gray-800">{poultryData?.averagePerBird}</p>
             </div>
           </div>
         </div>

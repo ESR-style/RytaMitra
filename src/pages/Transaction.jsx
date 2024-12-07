@@ -1,17 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Typography, Paper, Select, MenuItem, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip } from '@mui/material';
+import { Box, Typography, Paper, Select, MenuItem, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip, Button } from '@mui/material';
 
 const Transaction = () => {
   const { t } = useTranslation();
   const [filter, setFilter] = useState('all');
+  const [transactions, setTransactions] = useState([]);
 
-  // Mock data - replace with actual data from your backend
-  const transactions = [
-    { id: 1, date: '2024-01-20', type: 'credit', amount: 5000, description: t('transactions.milkSale') },
-    { id: 2, date: '2024-01-19', type: 'debit', amount: 2000, description: t('transactions.feedPurchase') },
-    { id: 3, date: '2024-01-18', type: 'credit', amount: 15000, description: t('transactions.cropSale') },
-  ];
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  const fetchTransactions = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/transactions');
+      const data = await response.json();
+      setTransactions(data);
+    } catch (err) {
+      console.error('Error fetching transactions:', err);
+    }
+  };
+
+  const addTransaction = async (transactionData) => {
+    try {
+      await fetch('http://localhost:5000/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(transactionData)
+      });
+      fetchTransactions();
+    } catch (err) {
+      console.error('Error adding transaction:', err);
+    }
+  };
 
   return (
     <Box p={3}>

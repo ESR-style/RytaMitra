@@ -43,5 +43,30 @@
     "showChicken": "View Chicken Details",
     "showSchemes": "View Schemes",
     "showLoans": "View Loans"
+  },
+  "animals": {
+    "title": "Animal Management",
+    "dairy": {
+      "title": "Dairy Management",
+      "description": "Track milk production, revenue, and dairy cattle management",
+      "totalCows": "Total Cows",
+      "dailyProduction": "Daily Production (L)",
+      "monthlyRevenue": "Monthly Revenue (₹)",
+      "averagePerCow": "Average per Cow (L)",
+      "weeklyOverview": "Weekly Production Overview",
+      "dailyStats": "Daily Production",
+      "cowCount": "Total Cows"
+    },
+    "poultry": {
+      "title": "Poultry Management",
+      "description": "Monitor egg production, poultry health, and related revenue",
+      "totalBirds": "Total Birds",
+      "dailyEggs": "Daily Eggs",
+      "monthlyRevenue": "Monthly Revenue (₹)",
+      "averagePerBird": "Average per Bird",
+      "weeklyOverview": "Weekly Egg Production",
+      "dailyStats": "Daily Eggs",
+      "birdCount": "Total Birds"
+    }
   }
 }

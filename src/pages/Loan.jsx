@@ -50,6 +50,22 @@ const Loan = () => {
     }
   };
 
+  const translateLoanData = (loanData) => {
+    const knTranslations = {
+      // Common loan types
+      "General": "ಸಾಮಾನ್ಯ",
+      "Crop Loan": "ಬೆಳೆ ಸಾಲ",
+      "Agricultural Loan": "ಕೃಷಿ ಸಾಲ",
+      "Rural Loans": "ಗ್ರಾಮೀಣ ಸಾಲಗಳು",
+      "Kisan Credit Card": "ಕಿಸಾನ್ ಕ್ರೆಡಿಟ್ ಕಾರ್ಡ್",
+    };
+
+    return {
+      ...loanData,
+      loan_type_kn: knTranslations[loanData.loan_type] || loanData.loan_type,
+    };
+  };
+
   const handleAddLoan = async (e) => {
     e.preventDefault();
     
@@ -67,17 +83,20 @@ const Loan = () => {
         throw new Error(t('loans.errors.invalidAmount'));
       }
 
+      // Translate and prepare loan data
+      const loanData = translateLoanData({
+        ...newLoan,
+        amount: Number(newLoan.amount),
+        interest_rate: Number(newLoan.interest_rate),
+        loan_type: newLoan.loan_type || 'General'
+      });
+
       const response = await fetch('http://localhost:5000/api/farmer-loans', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...newLoan,
-          amount: Number(newLoan.amount),
-          interest_rate: Number(newLoan.interest_rate),
-          loan_type: newLoan.loan_type || 'General'
-        }),
+        body: JSON.stringify(loanData),
       });
       
       const data = await response.json();

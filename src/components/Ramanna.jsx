@@ -12,7 +12,7 @@ const Ramanna = () => {
   const speechQueue = useRef([]);
   const isSpeaking = useRef(false);
 
-  const genAI = new GoogleGenerativeAI('AIzaSyC2hmL7eWNB_TW5qCpFHNrtmJ0LVAaHzIs');
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const Ramanna = () => {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
         type: 'ai', 
-        text: 'ತಾಂತ್ರಿಕ ತೊಂದರೆ ಎದುರಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯ���್ನಿಸಿ.' 
+        text: 'ತಾಂತ್ರಿಕ ತೊಂದರೆ ಎದುರಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.' 
       }]);
     }
     setLoading(false);

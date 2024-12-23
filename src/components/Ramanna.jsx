@@ -6,7 +6,7 @@ const Ramanna = () => {
   const [messages, setMessages] = useState([]);
   const [isListening, setIsListening] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [availableVoice, setAvailableVoice] = useState(null);
+  const [availableVoice, setAvailableVoice] = useState(null); 
   const chatContainerRef = useRef(null);
   const recognition = useRef(null);
   const speechQueue = useRef([]);

@@ -12,7 +12,7 @@ const Ramanna = () => {
   const speechQueue = useRef([]);
   const isSpeaking = useRef(false);
 
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_API_KEY);
+  const genAI = new GoogleGenerativeAI("AIzaSyD1RLNc17gvaTBrwsMPB-8DAfo4J9w8iFk");
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   useEffect(() => {

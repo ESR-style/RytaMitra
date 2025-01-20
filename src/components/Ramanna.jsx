@@ -166,7 +166,7 @@ const Ramanna = () => {
         className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
       >
         <span>🎤</span>
-        <span>ರಮಣ್ಣ</span>
+        <span>ರಾಮಣ್ಣ</span>
       </button>
 
       {isOpen && (

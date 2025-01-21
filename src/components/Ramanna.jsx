@@ -181,7 +181,8 @@ const Ramanna = () => {
                         z-50 sm:mt-2">
             <div className="p-4 border-b border-emerald-100">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-medium">ರಮಣ್ಣನೊಂದಿಗೆ ಮಾತನಾಡಿ</h3>
+                <h3 className="text-lg font-medium">
+                ರಾಮಣ್ಣನೊಂದಿಗೆ ಮಾತನಾಡಿ</h3>
                 <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700">✕</button>
               </div>
             </div>

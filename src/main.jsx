@@ -16,6 +16,10 @@ import Chicken from './pages/Chicken.jsx';
 import Scheme from './pages/Scheme.jsx';
 import Animals from './pages/Animals.jsx';
 import SchemeDetails from './pages/SchemeDetails.jsx';
+import Agriculture from './pages/Agriculture.jsx';
+import FloodAlert from './pages/FloodAlert.jsx';
+import Disease from './pages/Disease.jsx';
+import Irrigation from './pages/Irrigation.jsx';
 import './i18n';
 
 const router = createBrowserRouter([
@@ -62,6 +66,22 @@ const router = createBrowserRouter([
       {
         path: "/animals",
         element: <Animals/>,
+      },
+      {
+        path: "/agriculture",
+        element: <Agriculture/>,
+      },
+      {
+        path: "/alert",
+        element: <FloodAlert/>,
+      },
+      {
+        path: "/detection",
+        element: <Disease/>,
+      },
+      {
+        path: "/irrigation",
+        element: <Irrigation/>,
       }
     ]
   }

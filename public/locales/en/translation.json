@@ -28,7 +28,8 @@
     "schemes": "Government Schemes",
     "animals": "Animals",
     "cow": "Cow",
-    "chicken": "Chicken"
+    "chicken": "Chicken",
+    "agriculture": "Agriculture"
   },
   "topbar": {
     "title": "RytaMitra - Farmer's Friend",
@@ -332,6 +333,58 @@
         "interestRate": "Interest Rate",
         "timePeriod": "Time Period"
       }
+    }
+  },
+  "agriculture": {
+    "title": "Agriculture Management",
+    "weather": {
+      "title": "Weather Information",
+      "description": "Current weather and forecast",
+      "loading": "Loading weather information...",
+      "current": "Current Weather",
+      "humidity": "Humidity",
+      "wind": "Wind Speed",
+      "forecast": "5-Day Forecast",
+      "advisory": "Farmer's Advisory",
+      "errorMessage": "Please enable your location services",
+      "noData": "Weather information not available",
+      "advisoryList": {
+        "highTemp": "High Temperature - Water your plants",
+        "waterCrops": "Increase irrigation frequency for crops",
+        "lowTemp": "Low Temperature - Protect your crops",
+        "frostProtection": "Cover crops to protect from frost",
+        "highHumidity": "High Humidity - Take disease control measures",
+        "fungalAlert": "Risk of fungal diseases - Apply fungicides",
+        "lowHumidity": "Low Humidity - Extra irrigation needed",
+        "waterConservation": "High evaporation - Use mulching",
+        "strongWind": "Strong Winds - Provide support to crops",
+        "cropSupport": "Install stakes for tall crops",
+        "noonActivity": "Avoid spraying during peak sunshine"
+      }
+    },
+    "flood": {
+      "title": "Flood Alert",
+      "description": "Flood forecasts and warnings",
+      "alerts": "Flood Alerts",
+      "riskLevel": "Risk Level",
+      "safetyTips": "Safety Tips",
+      "emergency": "Emergency Contacts"
+    },
+    "disease": {
+      "title": "Disease Detection",
+      "description": "Plant disease detection and management",
+      "upload": "Upload Image",
+      "analyze": "Analyze",
+      "results": "Results",
+      "treatment": "Treatment Suggestions"
+    },
+    "irrigation": {
+      "title": "Irrigation",
+      "description": "Irrigation scheduling and management",
+      "schedule": "Irrigation Schedule",
+      "waterUsage": "Water Usage",
+      "efficiency": "Efficiency Analysis",
+      "tips": "Water Conservation Tips"
     }
   }
 }

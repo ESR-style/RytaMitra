@@ -11,6 +11,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileMenuOpen, setMobileMenuO
     { path: '/transaction', label: t('sidebar.transactions'), icon: '💸' },
     { path: '/loan', label: t('sidebar.loans'), icon: '🏦' }, // Changed from /loans to /loan
     { path: '/scheme', label: t('sidebar.schemes'), icon: '📋' }, // Changed from /schemes to /scheme
+    { path: '/agriculture', label: t('sidebar.agriculture'), icon: '🌾' },
     {
       path: '/animals',
       label: t('sidebar.animals'),

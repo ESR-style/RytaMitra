@@ -376,7 +376,14 @@
       "upload": "Upload Image",
       "analyze": "Analyze",
       "results": "Results",
-      "treatment": "Treatment Suggestions"
+      "treatment": "Treatment Suggestions",
+      "useCamera": "Use Camera",
+      "uploadImage": "Upload Image",
+      "capture": "Capture",
+      "analyzing": "Analyzing...",
+      "detectDisease": "Detect Disease",
+      "uploadPrompt": "Upload an image or use camera to capture",
+      "result": "Detection Result"
     },
     "irrigation": {
       "title": "Irrigation",

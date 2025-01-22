@@ -7,6 +7,22 @@ const Agriculture = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const handleVoiceCommands = (event) => {
+      const command = event.detail.toLowerCase();
+      if (['ರೋಗ ಪತ್ತೆ', 'ಸಸ್ಯ ರೋಗ', 'ಬೆಳೆ ರೋಗ'].includes(command)) {
+        navigate('/detection');
+      } else if (['ಪ್ರವಾಹ', 'ಪ್ರವಾಹ ಎಚ್ಚರಿಕೆ', 'ನೆರೆ ಮಾಹಿತಿ'].includes(command)) {
+        navigate('/alert');
+      } else if (['ನೀರಾವರಿ', 'ನೀರು ಹಾಕುವುದು', 'ನೀರು ನಿರ್ವಹಣೆ'].includes(command)) {
+        navigate('/irrigation');
+      }
+    };
+
+    window.addEventListener('voiceCommand', handleVoiceCommands);
+    return () => window.removeEventListener('voiceCommand', handleVoiceCommands);
+  }, [navigate]);
+
   const sections = [
     {
       id: 'weather',

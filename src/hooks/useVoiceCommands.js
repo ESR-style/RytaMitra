@@ -10,13 +10,46 @@ const useVoiceCommands = () => {
 
   const commandMaps = {
     'kn': {
+      // Navigation Commands
       'ಮುಖ್ಯ ಪುಟ': '/',
+      'ಹೋಮ್ ಪುಟ': '/',
+      'ಡ್ಯಾಶ್‌ಬೋರ್ಡ್': '/',
+      'ಹಿಂದೆ ಹೋಗು': 'BACK',
+
+      // Financial Commands
       'ಲೆಕ್ಕ ತೋರಿಸು': '/transaction',
+      'ವಹಿವಾಟು ತೋರಿಸು': '/transaction',
+      'ಖಾತೆ ನೋಡು': '/transaction',
       'ಚಿತ್ರ ತೋರಿಸು': '/charts',
+      'ಗ್ರಾಫ್ ತೋರಿಸು': '/charts',
+
+      // Livestock Commands
       'ದನದ ಲೆಕ್ಕ': '/cow',
+      'ಹಸು ವಿವರ': '/cow',
       'ಕೋಳಿ ಲೆಕ್ಕ': '/chicken',
+      'ಕೋಳಿ ಮಾಹಿತಿ': '/chicken',
+
+      // Schemes & Loans
       'ಯೋಜನೆಗಳು': '/scheme',
-      'ಸಾಲ': '/loan'
+      'ಸರಕಾರಿ ಯೋಜನೆ': '/scheme',
+      'ಸಹಾಯಧನ': '/scheme',
+      'ಸಾಲ': '/loan',
+      'ಸಾಲ ತೋರಿಸು': '/loan',
+      'ಬ್ಯಾಂಕ್ ಸಾಲ': '/loan',
+
+      // Agriculture Commands
+      'ಕೃಷಿ': '/agriculture',
+      'ಬೆಳೆ ಮಾಹಿತಿ': '/agriculture',
+      'ಬೆಳೆ ನೋಡು': '/agriculture',
+      'ರೋಗ ಪತ್ತೆ': '/detection',
+      'ಸಸ್ಯ ರೋಗ': '/detection',
+      'ಬೆಳೆ ರೋಗ': '/detection',
+      'ಪ್ರವಾಹ': '/alert',
+      'ಪ್ರವಾಹ ಎಚ್ಚರಿಕೆ': '/alert',
+      'ನೆರೆ ಮಾಹಿತಿ': '/alert',
+      'ನೀರಾವರಿ': '/irrigation',
+      'ನೀರು ಹಾಕುವುದು': '/irrigation',
+      'ನೀರು ನಿರ್ವಹಣೆ': '/irrigation'
     },
     'te': {
       'డాష్‌బోర్డ్': '/',

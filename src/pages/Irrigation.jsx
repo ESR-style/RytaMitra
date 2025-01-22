@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FaWater, FaCloudRain, FaTemperatureHigh, FaTint } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Irrigation = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const fetchWeatherData = async (lat, lon) => {
     try {
@@ -45,6 +47,20 @@ const Irrigation = () => {
       setError('ಸ್ಥಳ ಸೇವೆಗಳು ಲಭ್ಯವಿಲ್ಲ');
     }
   }, []);
+
+  useEffect(() => {
+    const handleVoiceCommands = (event) => {
+      const command = event.detail.toLowerCase();
+      if (['ಕೃಷಿ ಪುಟ', 'ಹಿಂದೆ ಹೋಗು', 'ಮುಖ್ಯ ಪುಟ'].includes(command)) {
+        navigate('/agriculture');
+      } else if (['ಮಾಹಿತಿ ನವೀಕರಿಸು', 'ರಿಫ್ರೆಶ್'].includes(command)) {
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener('voiceCommand', handleVoiceCommands);
+    return () => window.removeEventListener('voiceCommand', handleVoiceCommands);
+  }, [navigate]);
 
   const calculateIrrigationNeeds = () => {
     if (!weatherData || !forecast) return null;

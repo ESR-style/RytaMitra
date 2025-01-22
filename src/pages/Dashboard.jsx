@@ -22,13 +22,79 @@ const DashboardCard = ({ title, value, icon, trend, trendValue }) => (
 
 // Add this constant before the Dashboard component
 const voiceCommandsList = {
+  // Basic Navigation
   'ಮುಖ್ಯ ಪುಟ': 'commands.goToDashboard',
+  'ಹೋಮ್ ಪುಟ': 'commands.goToDashboard',
+  'ಡ್ಯಾಶ್‌ಬೋರ್ಡ್': 'commands.goToDashboard',
+
+  // Financial Commands
   'ಲೆಕ್ಕ ತೋರಿಸು': 'commands.showTransactions',
+  'ವಹಿವಾಟು ತೋರಿಸು': 'commands.showTransactions',
+  'ಖಾತೆ ನೋಡು': 'commands.showTransactions',
+
+  // Chart Commands
   'ಚಿತ್ರ ತೋರಿಸು': 'commands.showCharts',
+  'ಗ್ರಾಫ್ ತೋರಿಸು': 'commands.showCharts',
+
+  // Livestock Commands
   'ದನದ ಲೆಕ್ಕ': 'commands.showCow',
+  'ಹಸು ವಿವರ': 'commands.showCow',
   'ಕೋಳಿ ಲೆಕ್ಕ': 'commands.showChicken',
+  'ಕೋಳಿ ಮಾಹಿತಿ': 'commands.showChicken',
+
+  // Government Schemes
   'ಯೋಜನೆಗಳು': 'commands.showSchemes',
-  'ಸಾಲ': 'commands.showLoans'
+  'ಸರಕಾರಿ ಯೋಜನೆ': 'commands.showSchemes',
+  'ಸಹಾಯಧನ': 'commands.showSchemes',
+
+  // Loan Related
+  'ಸಾಲ': 'commands.showLoans',
+  'ಸಾಲ ತೋರಿಸು': 'commands.showLoans',
+  'ಬ್ಯಾಂಕ್ ಸಾಲ': 'commands.showLoans',
+
+  // Agriculture Related
+  'ಕೃಷಿ': 'commands.showAgriculture',
+  'ಬೆಳೆ ಮಾಹಿತಿ': 'commands.showAgriculture',
+  'ಬೆಳೆ ನೋಡು': 'commands.showAgriculture',
+
+  // Disease Detection
+  'ರೋಗ ಪತ್ತೆ': 'commands.showDisease',
+  'ಸಸ್ಯ ರೋಗ': 'commands.showDisease',
+  'ಬೆಳೆ ರೋಗ': 'commands.showDisease',
+
+  // Flood Alert
+  'ಪ್ರವಾಹ': 'commands.showFloodAlert',
+  'ಪ್ರವಾಹ ಎಚ್ಚರಿಕೆ': 'commands.showFloodAlert',
+  'ನೆರೆ ಮಾಹಿತಿ': 'commands.showFloodAlert',
+
+  // Irrigation
+  'ನೀರಾವರಿ': 'commands.showIrrigation',
+  'ನೀರು ಹಾಕುವುದು': 'commands.showIrrigation',
+  'ನೀರು ನಿರ್ವಹಣೆ': 'commands.showIrrigation'
+};
+
+// Organize commands by category for better display
+const commandCategories = {
+  navigation: {
+    title: 'ನ್ಯಾವಿಗೇಶನ್',
+    commands: ['ಮುಖ್ಯ ಪುಟ', 'ಹಿಂದೆ ಹೋಗು']
+  },
+  financial: {
+    title: 'ಆರ್ಥಿಕ',
+    commands: ['ಲೆಕ್ಕ ತೋರಿಸು', 'ಚಿತ್ರ ತೋರಿಸು']
+  },
+  livestock: {
+    title: 'ಪಶುಸಂಗೋಪನೆ',
+    commands: ['ದನದ ಲೆಕ್ಕ', 'ಕೋಳಿ ಲೆಕ್ಕ']
+  },
+  agriculture: {
+    title: 'ಕೃಷಿ',
+    commands: ['ಕೃಷಿ', 'ರೋಗ ಪತ್ತೆ', 'ಪ್ರವಾಹ', 'ನೀರಾವರಿ']
+  },
+  schemes: {
+    title: 'ಯೋಜನೆಗಳು & ಸಾಲ',
+    commands: ['ಯೋಜನೆಗಳು', 'ಸಾಲ']
+  }
 };
 
 const Dashboard = () => {
@@ -97,6 +163,7 @@ const Dashboard = () => {
         />
       </div>
 
+      {/* Transactions Section */}
       <div className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <div className="lg:col-span-2">
           <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-emerald-100">
@@ -125,6 +192,7 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* Active Schemes Section */}
         <div className="lg:col-span-1">
           <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-emerald-100">
             <div className="flex justify-between items-center mb-4">
@@ -153,22 +221,24 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Improved Voice Commands Section */}
+      {/* Voice Commands Section */}
       <div className="mt-4 sm:mt-6">
         <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-4 sm:p-6 rounded-xl border border-blue-100">
-          <h3 className="text-lg font-medium text-blue-800 mb-4">
+          <h3 className="text-lg font-medium text-blue-800 mb-4 flex items-center">
             <span className="mr-2">🎤</span>
             {t('dashboard.voiceCommands')}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {Object.entries(voiceCommandsList).map(([command, description]) => (
-              <div key={command} 
-                   className="flex items-center space-x-2 bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-              >
-                <span className="text-blue-500">🎤</span>
-                <div>
-                  <p className="font-medium">{command}</p>
-                  <p className="text-sm text-gray-600">{t(description)}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Object.entries(commandCategories).map(([key, category]) => (
+              <div key={key} className="bg-white rounded-lg p-4 shadow-sm">
+                <h4 className="font-medium text-emerald-800 mb-2">{category.title}</h4>
+                <div className="space-y-1">
+                  {category.commands.map(command => (
+                    <div key={command} className="text-sm flex items-center gap-2">
+                      <span className="text-blue-500 text-xs">🎤</span>
+                      <span>{command}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}

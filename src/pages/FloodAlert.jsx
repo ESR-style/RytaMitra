@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const FloodAlert = () => {
@@ -6,6 +7,7 @@ const FloodAlert = () => {
   const [floodWarning, setFloodWarning] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const fetchFloodData = async (latitude, longitude) => {
     try {
@@ -45,6 +47,20 @@ const FloodAlert = () => {
       setError('ನಿಮ್ಮ ಬ್ರೌಸರ್ ಸ್ಥಳ ಸೇವೆಗಳನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ');
     }
   }, []);
+
+  useEffect(() => {
+    const handleVoiceCommands = (event) => {
+      const command = event.detail.toLowerCase();
+      if (['ಕೃಷಿ ಪುಟ', 'ಹಿಂದೆ ಹೋಗು', 'ಮುಖ್ಯ ಪುಟ'].includes(command)) {
+        navigate('/agriculture');
+      } else if (['ಮಾಹಿತಿ ನವೀಕರಿಸು', 'ರಿಫ್ರೆಶ್'].includes(command)) {
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener('voiceCommand', handleVoiceCommands);
+    return () => window.removeEventListener('voiceCommand', handleVoiceCommands);
+  }, [navigate]);
 
   return (
     <div className="p-6 space-y-6">

@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Webcam from 'react-webcam';
 
@@ -10,6 +11,24 @@ const Disease = () => {
   const [showCamera, setShowCamera] = useState(false);
   const webcamRef = useRef(null);
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleVoiceCommands = (event) => {
+      const command = event.detail.toLowerCase();
+      if (['ಫೋಟೋ ತೆಗೆ', 'ಚಿತ್ರ ತೆಗೆ'].includes(command)) {
+        // Trigger photo capture
+        if (webcamRef.current) {
+          captureImage();
+        }
+      } else if (['ಮುಖ್ಯ ಪುಟ', 'ಹಿಂದೆ ಹೋಗು'].includes(command)) {
+        navigate('/agriculture');
+      }
+    };
+
+    window.addEventListener('voiceCommand', handleVoiceCommands);
+    return () => window.removeEventListener('voiceCommand', handleVoiceCommands);
+  }, [navigate]);
 
   // Treatment suggestions database
   const treatments = {
